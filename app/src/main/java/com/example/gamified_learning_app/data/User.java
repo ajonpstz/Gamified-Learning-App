@@ -4,9 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 public class User {
-    String  userName,
+    public String  userName,
             description,
             email;
-    Date    dateJoined;
-    List<TaskList> taskLists;
+    public Date    dateJoined;
+    public List<TaskList> taskLists;
 }

@@ -6,6 +6,8 @@ public class MemorizationList extends Task {
 	static class Card {
 		String  front,
 				back;
+		float success;
+		int frequency;
 	}
 	List<Card> cards;
 }
