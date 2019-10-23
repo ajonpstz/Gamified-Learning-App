@@ -37,33 +37,43 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class Scheduler {
 	
 	private int MAX_DURATION = 500; // 8 hours a day maximum
 
 	// EDD
-	void generateSchedule(User user, Date today) {
+	// greedy algorithm that schedules things of higher priority first, each day waiting increases
+	// priority of a process by a certain amount
+	void generateSchedule(User user) {
 		List<Task> tasks = new ArrayList<Task>();
 		for (TaskList ls : user.taskLists) {
 			tasks.addAll(ls.tasks);
 		}
-		Collections.sort(tasks, (Task t1, Task t2) -> {
-			return getProjectedDate(t1).compareTo(getProjectedDate(t2));
-		});
-		int sumDurations = 0;
-		for (Task task : tasks) {
-			int duration = task.computeExpectedDuration();
-			sumDurations += duration;
-			if (sumDurations > MAX_DURATION) {
-				sumDurations = duration;
-				today.setDate(today.getDay()+1);
+		if (tasks.size() > 0) {
+			Collections.sort(tasks, (Task t1, Task t2) -> {
+				return t1.expectedDate.compareTo(t2.expectedDate);
+			});
+			Date today = tasks.get(0).expectedDate;
+			PriorityQueue<Task> pq = new PriorityQueue<Task>(1, (Task t1, Task t2) -> {
+				return (int) Math.signum(t2.priority - t1.priority);
+			});
+			for (int taskIndex = 0; taskIndex < tasks.size(); ) {
+				if (pq.isEmpty()) {
+					today = tasks.get(taskIndex).expectedDate;
+					pq.add(tasks.get(taskIndex++));
+				}
+				while (taskIndex < tasks.size() && tasks.get(taskIndex).equals(today)) {
+					pq.add(tasks.get(taskIndex++));
+				}
+				int currentDuration = 0;
+				while (!pq.isEmpty() &&
+					pq.peek().computeExpectedDuration() + currentDuration <= MAX_DURATION) {
+					pq.poll().nextScheduled = today;
+				}
+				today.setDate(today.getDay() + 1);
 			}
-			task.nextScheduled = today;
 		}
-	}
-
-	Date getProjectedDate(Task t) {
-		return null;
 	}
 }

@@ -3,13 +3,15 @@ package com.example.gamified_learning_app.data;
 import java.util.Date;
 import java.util.List;
 
-public class Task {
+public abstract class Task {
 	public String  owner,
-			title,
-			description;
-	public Date    dateCreated,
-			dateUpdated,
-			nextScheduled;
+					title,
+					description;
+	public Date     dateCreated,
+					dateUpdated,
+					nextScheduled,
+					expectedDate;
+	public float    priority;
 	
 	// History
 	static class Event {
@@ -20,7 +22,7 @@ public class Task {
 	}
 	public List<Event> events;
 	
-	public int computeExpectedDuration() {
-		return 0;
-	}
+	public abstract int computeExpectedDuration();
+	protected abstract Date computeExpectedDate();
+	
 }
