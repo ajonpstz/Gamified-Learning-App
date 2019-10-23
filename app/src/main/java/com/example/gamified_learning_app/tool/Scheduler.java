@@ -39,9 +39,11 @@ import java.util.Date;
 import java.util.List;
 
 public class Scheduler {
+	
+	private int MAX_DURATION = 500; // 8 hours a day maximum
 
 	// EDD
-	void generateSchedule(User user) {
+	void generateSchedule(User user, Date today) {
 		List<Task> tasks = new ArrayList<Task>();
 		for (TaskList ls : user.taskLists) {
 			tasks.addAll(ls.tasks);
@@ -49,6 +51,16 @@ public class Scheduler {
 		Collections.sort(tasks, (Task t1, Task t2) -> {
 			return getProjectedDate(t1).compareTo(getProjectedDate(t2));
 		});
+		int sumDurations = 0;
+		for (Task task : tasks) {
+			int duration = task.computeExpectedDuration();
+			sumDurations += duration;
+			if (sumDurations > MAX_DURATION) {
+				sumDurations = duration;
+				today.setDate(today.getDay()+1);
+			}
+			task.nextScheduled = today;
+		}
 	}
 
 	Date getProjectedDate(Task t) {

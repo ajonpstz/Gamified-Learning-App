@@ -20,7 +20,7 @@ public class Task {
 	}
 	public List<Event> events;
 	
-	int computeExpectedDuration() {
+	public int computeExpectedDuration() {
 		return 0;
 	}
 }
