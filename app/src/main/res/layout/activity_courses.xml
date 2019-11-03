@@ -4,24 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Homepage">
+    android:background="@color/colorPrimaryDark"
+    tools:context=".Courses" >
 
     <LinearLayout
-        android:layout_width="412dp"
-        android:layout_height="731dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/rightLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -30,7 +25,8 @@
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
-                android:gravity="center">
+                android:gravity="center"
+                android:onClick="goToHomepage">
 
                 <ImageView
                     android:id="@+id/user_icon"
@@ -47,8 +43,7 @@
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:onClick="goToCourses">
+                android:gravity="center">
 
                 <ImageView
                     android:id="@+id/book_icon"
@@ -76,8 +71,15 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            app:srcCompat="@drawable/icons8_book_shelf"
+            tools:scaleType="centerInside" />
+
     </LinearLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
