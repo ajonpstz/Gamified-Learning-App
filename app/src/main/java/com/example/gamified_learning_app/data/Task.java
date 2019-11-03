@@ -9,20 +9,19 @@ public abstract class Task {
 					description;
 	public Date     dateCreated,
 					dateUpdated,
-					nextScheduled,
-					expectedDate;
-	public float    priority;
+					dateScheduled;
+	public double    priority;
 	
 	// History
-	static class Event {
+	static protected class Event {
 		Date    datePerformed;
-		float   success;
+		double   success;
 		boolean attempted;
 		int     duration;
 	}
-	public List<Event> events;
+	protected List<Event> events;
 	
 	public abstract int computeExpectedDuration();
-	protected abstract Date computeExpectedDate();
+	public abstract Date computeExpectedDate();
 	
 }
