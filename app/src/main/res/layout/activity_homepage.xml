@@ -33,7 +33,7 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/imageView5"
+                    android:id="@+id/user_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -50,7 +50,7 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/book_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -63,10 +63,11 @@
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 android:background="@color/colorPrimary"
-                android:gravity="center">
+                android:gravity="center"
+                android:onClick="goToLogin">
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/logout_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
