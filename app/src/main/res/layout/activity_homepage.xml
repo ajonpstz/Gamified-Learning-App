@@ -29,14 +29,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary">
+                android:background="@color/colorPrimary"
+                android:gravity="center">
 
-                <Button
-                    android:id="@+id/textView01"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/colorPrimaryDark"
-                    android:text="My Profile" />
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/icons8_user" />
 
             </LinearLayout>
 
@@ -45,14 +46,15 @@
                 android:layout_width="fill_parent"
                 android:layout_height="80dp"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary">
+                android:background="@color/colorPrimary"
+                android:gravity="center">
 
-                <Button
-                    android:id="@+id/textView02"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/colorPrimaryDark"
-                    android:text="My Courses" />
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/icons8_book_shelf" />
             </LinearLayout>
 
             <LinearLayout
@@ -60,16 +62,17 @@
                 android:layout_width="fill_parent"
                 android:layout_height="80dp"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary">
+                android:background="@color/colorPrimary"
+                android:gravity="center">
 
-                <Button
-                    android:id="@+id/textView03"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/colorPrimaryDark"
-                    android:text="Log Out"
-                    android:onClick="goToLogin"/>/>
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/icons8_logout" />
             </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 
