@@ -13,10 +13,17 @@
     #63326E
     -->
 
-    <color name="colorPrimary">#C97D60</color>
-    <color name="colorPrimaryDark">#272838</color>
-    <color name="colorAccent">#C97D60</color>
-    <color name="colorAccent2">#875053</color>
+    <color name="colorPrimary">#006299</color>
+    <color name="colorPrimaryDark">#003861</color>
+    <color name="colorAccent">#993955</color>
+    <color name="colorAccent_secondary">#FF8552</color>
+    <color name="colorHighlight">#B2ABF2</color>
+
+
     <color name="colorText">#FFFFFF</color>
+
+    <color name="gradient_main_1">#006299</color>
+    <color name="gradient_main_2">#003861</color>
+
 
 </resources>
