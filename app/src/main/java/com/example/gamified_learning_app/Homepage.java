@@ -24,8 +24,7 @@ public class Homepage extends AppCompatActivity {
     public void goToCourses(View view){
         Intent intent = new Intent(this, Courses.class);
         startActivity(intent);
+        overridePendingTransition(0, 0);
+
     }
-
-    //sam test
-
 }

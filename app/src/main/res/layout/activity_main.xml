@@ -28,7 +28,7 @@
         android:layout_width="260dp"
         android:layout_height="68dp"
         android:gravity="center"
-        android:text="APP NAME"
+        android:text="LORNIT"
         android:textAllCaps="false"
         android:textColor="@color/colorText"
 

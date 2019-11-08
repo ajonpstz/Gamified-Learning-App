@@ -20,5 +20,6 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, Homepage.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_south, R.anim.slide_out_south);
     }
 }

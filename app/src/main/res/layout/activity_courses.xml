@@ -73,12 +73,11 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/load_icon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="center"
-            app:srcCompat="@drawable/icons8_book_shelf"
-            tools:scaleType="centerInside" />
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/icons8_loading" />
 
     </LinearLayout>
 
