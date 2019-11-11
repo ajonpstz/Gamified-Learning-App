@@ -1,13 +1,18 @@
 package com.example.gamified_learning_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
@@ -23,6 +28,7 @@ public class Courses extends AppCompatActivity {
 
     ImageView load_icon;
     Animation rotate_anim;
+    LinearLayout llayout;
 
 
     private Socket socket;
@@ -38,14 +44,16 @@ public class Courses extends AppCompatActivity {
                 @Override
                 public void call(Object... args) {
                     if (args != null && args.length >= 1){
-                        String[] courses = ((String)args[0]).split("\n");
-                        for (int i = 0 ; i < courses.length; i ++){
-
-                        }
-
-
-                        load_icon.clearAnimation();
-                        load_icon.setVisibility(View.INVISIBLE);
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                load_icon.clearAnimation();
+                                llayout.removeView(load_icon);
+                                String[] courses = ((String)args[0]).split("\n");
+                                for (int i = 0 ; i < courses.length; i ++){
+                                    System.out.println(courses[i]);
+                                }
+                            }
+                        });
                     }
                 }
             });
@@ -59,9 +67,18 @@ public class Courses extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
 
-        load_icon=(ImageView)findViewById(R.id.load_icon);
+        load_icon = new ImageView(getApplicationContext());
+        load_icon.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        load_icon.setImageDrawable(getDrawable(R.drawable.icons8_loading));
+        load_icon.setPadding(0,200,0,200);
+
+
+        llayout = (LinearLayout) findViewById(R.id.linearLayout);
+        llayout.addView(load_icon);
         rotate_anim = AnimationUtils.loadAnimation(this,R.anim.rotate);
         load_icon.startAnimation(rotate_anim);
+
+
 
         socket.connect();
     }
