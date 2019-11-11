@@ -4,37 +4,36 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.example.gamified_learning_app.networkio.NetworkConstants;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 
 public class Courses extends AppCompatActivity {
-
-    private static final int SERVER_PORT = 3000;
-    private static final String SERVER_IP = "10.0.2.2";
 
     ImageView load_icon;
     Animation rotate_anim;
     LinearLayout llayout;
 
+    ArrayList<TextView> textViews = new ArrayList<>();
+
 
     private Socket socket;
     {
         try{
-            socket = IO.socket("http://" + SERVER_IP + ":" + SERVER_PORT + "/");
+            socket = IO.socket("http://" + NetworkConstants.SERVER_IP + ":" + NetworkConstants.SERVER_PORT + "/");
             socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
@@ -51,6 +50,14 @@ public class Courses extends AppCompatActivity {
                                 String[] courses = ((String)args[0]).split("\n");
                                 for (int i = 0 ; i < courses.length; i ++){
                                     System.out.println(courses[i]);
+                                    TextView t = new TextView(getApplicationContext());
+                                    t.setText(courses[i]);
+                                    t.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorText));
+                                    t.setPadding(50,50,50,50);
+                                    t.setTextSize(20);
+
+                                    llayout.addView(t);
+                                    textViews.add(t);
                                 }
                             }
                         });
