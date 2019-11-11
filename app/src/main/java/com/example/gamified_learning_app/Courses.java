@@ -55,6 +55,8 @@ public class Courses extends AppCompatActivity {
                                     t.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorText));
                                     t.setPadding(50,50,50,50);
                                     t.setTextSize(20);
+                                    t.setBackgroundResource(R.drawable.text_border);
+                                    //t.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent));
 
                                     llayout.addView(t);
                                     textViews.add(t);
