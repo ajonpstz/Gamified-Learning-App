@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "612077610989",
+    "firebase_url": "https://lornit.firebaseio.com",
+    "project_id": "lornit",
+    "storage_bucket": "lornit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:612077610989:android:9ef9c4360dba091c6829e4",
+        "android_client_info": {
+          "package_name": "com.example.gamified_learning_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "612077610989-8deslj8r8nectn7uieid6uspp3ojhepa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gamified_learning_app",
+            "certificate_hash": "b70940765cc8833c7c0fa11231598d158265162f"
+          }
+        },
+        {
+          "client_id": "612077610989-jq0rk5jd343mn9p1m5vv2v8nunkvpceh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIF6Gds59KMJxPISXQsc7sv_giU07QXUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "612077610989-jq0rk5jd343mn9p1m5vv2v8nunkvpceh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
