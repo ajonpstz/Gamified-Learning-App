@@ -142,9 +142,13 @@ public class DBManager extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// This database is only a cache for online data, so its upgrade policy is
 		// to simply to discard the data and start over
+		dropAll(db);
+		onCreate(db);
+	}
+	
+	public void dropAll(SQLiteDatabase db) {
 		for (Table table : tables)
 			db.execSQL("DROP TABLE IF EXISTS " + table.TABLE_NAME);
-		onCreate(db);
 	}
 	
 	public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
