@@ -15,8 +15,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Date;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,25 +55,11 @@ public class MainActivity extends AppCompatActivity {
     public String createAccount(String email, String username, String password) {
         if (valid(email) && valid(username) && valid(password)) {
             Log.d(TAG, "create account:" + email);
-        
-            // Check if email or username already exist
-            if (!manager.get(DBManager.TableRef.USER, "username=" + username).isEmpty())
-                return "username " + username + " has been claimed";
-            if (!manager.get(DBManager.TableRef.USER, "email=" + email).isEmpty())
-                return "email " + email + " has already registered";
-        
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(
                 MainActivity.this,
                 new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        ContentValues values = new ContentValues();
-                        values.put("username", username);
-                        values.put("email", email);
-                        values.put("dateJoined", (new Date()).toString());
-                        values.put("description","");
-                        manager.insert(DBManager.TableRef.USER, values, false);
-                        
                         // This is where you would put code for what happens after login
                     }
                 });
@@ -99,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     System.out.println("deleted: " + values.getAsString("email"));
-                    manager.delete(DBManager.TableRef.USER, values);
                 }
             });
         }
