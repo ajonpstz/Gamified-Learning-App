@@ -1,6 +1,5 @@
 package com.example.gamified_learning_app.tool;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -28,7 +27,7 @@ public class DBManager extends SQLiteOpenHelper {
 	// If you change the database schema, you must increment the database version.
 	public static final int DATABASE_VERSION = 1;
 	public static final String DATABASE_NAME = "FeedReader.db";
-	private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
+	private static FirebaseAuth mAuth;
 	public FirebaseInteractor interactor;
 	
 	
@@ -38,15 +37,29 @@ public class DBManager extends SQLiteOpenHelper {
 	
 	public static enum TableRef {
 		USER(0);
-		private int index;
+		public int index;
 		TableRef(int index) {
 			this.index = index;
 		}
 	}
 	
-	class FirebaseInteractor {
+	public class FirebaseInteractor {
 		public static final String TAG = "loginLogout";
-		FirebaseUser getCurrentUser() {
+		FirebaseInteractor() {
+			mAuth = FirebaseAuth.getInstance();
+			mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+				@Override
+				public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+					FirebaseUser user = getCurrentUser();
+					if (user == null)
+						System.out.println("onAuthStateChanged:signed_out:");
+					else {
+						System.out.println("onAuthStateChanged:signed_in: " + user.getEmail());
+					}
+				}
+			});
+		}
+		public FirebaseUser getCurrentUser() {
 			return mAuth.getCurrentUser();
 		}
 		/*  How to use:
@@ -61,15 +74,15 @@ public class DBManager extends SQLiteOpenHelper {
 				}
 			});
 		 */
-		String createAccount(String email, String username, String password,
+		public String createAccount(String email, String username, String password,
 		                     OnCompleteListener<AuthResult> listener) {
 			if (valid(email) && valid(username) && valid(password)) {
 				Log.d(TAG, "create account:" + email);
 				
 				// Check if email or username already exist
-				if (!get(TableRef.USER, "username = " + username).isEmpty())
+				if (!get(TableRef.USER, "username = '" + username + "'").isEmpty())
 					return "username " + username + " has been claimed";
-				if (!get(TableRef.USER, "email = " + email).isEmpty())
+				if (!get(TableRef.USER, "email = '" + email + "'").isEmpty())
 					return "email " + email + " has already registered";
 				
 				mAuth.createUserWithEmailAndPassword(email, password).
@@ -90,16 +103,30 @@ public class DBManager extends SQLiteOpenHelper {
 			} else
 				return "failed";
 		}
-		void signIn(String email, String password,
-		                    Activity act, OnCompleteListener<AuthResult> listener) {
+		public void signIn(String email, String password,
+		                    OnCompleteListener<AuthResult> listener) {
 			if (valid(email) && valid(password)) {
-				Log.d(TAG, "login:" + email);
 				mAuth.signInWithEmailAndPassword(email, password).
-					addOnCompleteListener(act, listener);
+					addOnCompleteListener(listener);
 			}
 		}
-		void signOut() { mAuth.signOut(); }
-		boolean valid(String str) {  return TextUtils.isEmpty(str); }
+		public void signOut() { mAuth.signOut(); }
+		public void deleteAccount(OnCompleteListener<Void> listener) {
+			ContentValues values = new ContentValues();
+			values.put("email", getCurrentUser().getEmail());
+			if (mAuth.getCurrentUser() != null) {
+				mAuth.getCurrentUser().delete()
+					.addOnCompleteListener(listener)
+					.addOnCompleteListener(new OnCompleteListener<Void>() {
+						@Override
+						public void onComplete(@NonNull Task task) {
+							System.out.println("deleted: " + values.getAsString("email"));
+							delete(TableRef.USER, values);
+						}
+					});
+			}
+		}
+		boolean valid(String str) {  return !TextUtils.isEmpty(str); }
 	}
 	
 	public DBManager(Context context) {
@@ -142,7 +169,8 @@ public class DBManager extends SQLiteOpenHelper {
 	
 	public void delete(TableRef ref, ContentValues entry) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(tables[ref.index].TABLE_NAME, "? = ?",
+		// Delete by email
+		db.delete(tables[ref.index].TABLE_NAME, "? = '?'",
 			new String[]{tables[ref.index].FIELD_NAME[0],
 				entry.getAsString(tables[ref.index].FIELD_NAME[0])});
 	}
@@ -154,6 +182,7 @@ public class DBManager extends SQLiteOpenHelper {
 		String query = "SELECT * FROM " + tables[ref.index].TABLE_NAME;
 		if (selector != null)
 			query += " WHERE " + selector;
+		query += ";";
 		Cursor c = db.rawQuery(query, null);
 		if (c.moveToFirst()) {
 			do {
