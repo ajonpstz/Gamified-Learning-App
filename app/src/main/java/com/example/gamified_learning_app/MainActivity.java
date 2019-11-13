@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
                         values.put("dateJoined", (new Date()).toString());
                         values.put("description","");
                         manager.insert(DBManager.TableRef.USER, values, false);
+                        
+                        // This is where you would put code for what happens after login
                     }
                 });
             // NULL is success
