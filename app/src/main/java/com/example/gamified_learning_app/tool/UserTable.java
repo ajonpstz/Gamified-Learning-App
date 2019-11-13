@@ -8,7 +8,7 @@ public final class UserTable extends Table {
 		this.FIELD_NAME = new String[]{
 			"email",
 			"username",
-			"desciption",
+			"description",
 			"dateJoined"
 		};
 		this.FIELD_TYPE = new String[]{

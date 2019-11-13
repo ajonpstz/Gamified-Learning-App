@@ -1,29 +1,28 @@
 package com.example.gamified_learning_app;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import com.example.gamified_learning_app.tool.DBManager;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthResult;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
-import androidx.annotation.NonNull;
-import androidx.test.platform.app.InstrumentationRegistry;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNull;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 @RunWith(RobolectricTestRunner.class)
 public class DBManagerUnitTest {
 	
 	static final String TEST_NAME = "admin",
 						TEST_EMAIL = "aqn180001@utdallas.edu",
-						TEST_PASSWORD = "sda982dslahsjhkadlshalk201h*@";
+						TEST_PASSWORD = "sda982dslahsjhkadlshalk201h*@",
+						TEST_DESCRIPTION = "this is admin";
 	
 	
 	@Test
@@ -31,44 +30,37 @@ public class DBManagerUnitTest {
 		Context mockContext = InstrumentationRegistry.getInstrumentation().getContext();
 		FirebaseApp.initializeApp(mockContext);
 		DBManager manager = new DBManager(mockContext);
+		ContentValues user = new ContentValues();
+		user.put("email", TEST_EMAIL);
+		user.put("username", TEST_NAME);
+		user.put("description", TEST_DESCRIPTION);
+		user.put("dateJoined", (new Date()).toString());
+		manager.insert(DBManager.TableRef.USER, user, true);
 		
-		// Remove account if exist
-		assertNull(manager.interactor.createAccount(TEST_EMAIL,
-			TEST_NAME, TEST_PASSWORD, new OnCompleteListener<AuthResult>() {
-				@Override
-				public void onComplete(@NonNull Task<AuthResult> task) {
-					System.out.println("HI");
-					manager.interactor.signIn(TEST_EMAIL, TEST_PASSWORD,
-						new OnCompleteListener<AuthResult>() {
-							@Override
-							public void onComplete(@NonNull Task<AuthResult> task) {
-								System.out.println("Logged In");
-								assertEquals(TEST_EMAIL,
-									manager.interactor.getCurrentUser().getEmail());
-								assertEquals(true,
-									manager.interactor.getCurrentUser().isEmailVerified());
-								manager.interactor.signOut();
-								assertNull(manager.interactor.getCurrentUser());
-								manager.interactor.signIn(TEST_EMAIL, TEST_PASSWORD,
-									new OnCompleteListener<AuthResult>() {
-										@Override
-										public void onComplete(@NonNull Task<AuthResult> task) {
-											System.out.println("Loged in");
-											assertEquals(TEST_EMAIL,
-												manager.interactor.getCurrentUser().getEmail());
-											assertEquals(true,
-												manager.interactor.getCurrentUser().isEmailVerified());
-											manager.interactor.deleteAccount(null);
-											System.out.println("Deleted");
-										}
-									}
-								);
-							}
-						}
-					);
-				}
-			}));
+		
+		List<Map<String,String>> map = manager.get(DBManager.TableRef.USER, null);
+		for (Map<String,String> entry : map) {
+			System.out.println(entry.toString());
+		}
+		
 		long t = System.currentTimeMillis();
-		while (System.currentTimeMillis() - t < 10000);
+		while (System.currentTimeMillis() - t < 2000);
+		
+		user.put("dateJoined", (new Date()).toString());
+		manager.update(DBManager.TableRef.USER, user);
+		
+		assert(manager.getReadableDatabase().rawQuery(
+			"SELECT * FROM users WHERE email='"+TEST_EMAIL+"'", null).moveToFirst());
+		
+		for (Map<String,String> entry : manager.get(DBManager.TableRef.USER, null)) {
+			System.out.println(entry.toString());
+		}
+		
+		manager.delete(DBManager.TableRef.USER, user);
+		
+		
+		for (Map<String,String> entry : manager.get(DBManager.TableRef.USER, null)) {
+			System.out.println(entry.toString());
+		}
 	}
 }
