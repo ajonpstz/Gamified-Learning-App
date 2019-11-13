@@ -29,7 +29,7 @@ public class DBManager extends SQLiteOpenHelper {
 	public static final int DATABASE_VERSION = 1;
 	public static final String DATABASE_NAME = "FeedReader.db";
 	private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
-	FirebaseInteractor interactor;
+	public FirebaseInteractor interactor;
 	
 	
 	public static final Table tables[] = {
