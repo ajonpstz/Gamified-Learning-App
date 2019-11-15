@@ -45,8 +45,6 @@ dependencies {
     implementation 'com.github.nkzawa:socket.io-client:0.6.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.1'
     implementation 'com.google.firebase:firebase-auth:19.1.0'
-    implementation 'com.google.firebase:firebase-core:17.2.1'
-    implementation 'com.google.android.gms:play-services-gcm:17.0.0'
 
     // Core library
     androidTestImplementation 'androidx.test:core:1.2.0'

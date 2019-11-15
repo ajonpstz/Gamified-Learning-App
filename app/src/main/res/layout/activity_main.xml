@@ -28,7 +28,7 @@
         android:layout_width="260dp"
         android:layout_height="68dp"
         android:gravity="center"
-        android:text="LORNIT"
+        android:text="@string/Lornit"
         android:textAllCaps="false"
         android:textColor="@color/colorText"
 
@@ -39,19 +39,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.114" />
-
-
-    <ImageView
-        android:id="@+id/Submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="goToHomepage"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.87"
-        app:srcCompat="@drawable/icons8_submit_60" />
 
     <ImageView
         android:id="@+id/pear"
@@ -68,7 +55,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email:"
+        android:text="@string/Email"
         android:textColor="@color/colorText"
         app:fontFamily="@font/advent_pro"
 
@@ -80,7 +67,7 @@
         app:layout_constraintVertical_bias="0.65" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/text_border"
@@ -90,7 +77,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
+        app:layout_constraintVertical_bias="0.65"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/textView3"
@@ -107,7 +95,7 @@
         app:layout_constraintVertical_bias="0.77" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/text_border"
@@ -118,5 +106,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.775" />
+
+    <ImageView
+        android:id="    @+id/Submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="submitLogin"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.87"
+        app:srcCompat="@drawable/icons8_submit_60"
+        android:contentDescription="TODO" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

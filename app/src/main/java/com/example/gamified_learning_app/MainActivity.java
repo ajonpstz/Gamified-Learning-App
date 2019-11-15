@@ -1,91 +1,122 @@
 package com.example.gamified_learning_app;
 
-import android.content.ContentValues;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.gamified_learning_app.tool.DBManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 public class MainActivity extends AppCompatActivity {
-    
-    public FirebaseAuth mAuth;
-    public DBManager manager;
-    
-    private static final String TAG = "loginLogout";
+	
+	private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		mAuth = FirebaseAuth.getInstance();
+		mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+			@Override
+			public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+				FirebaseUser user = firebaseAuth.getCurrentUser();
+				if (user == null) {
+				} else {
+					Intent intent = new Intent(MainActivity.this, Homepage.class);
+					startActivity(intent);
+					overridePendingTransition(R.anim.slide_in_south, R.anim.slide_out_south);
+				}
+			}
+		});
+		
+	}
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        FirebaseApp.initializeApp(MainActivity.this);
-        mAuth = FirebaseAuth.getInstance();
-        manager = new DBManager(this);
-        setContentView(R.layout.activity_main);
-        mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = mAuth.getCurrentUser();
-                if (user == null)
-                    System.out.println("onAuthStateChanged:signed_out:");
-                else {
-                    System.out.println("onAuthStateChanged:signed_in: " + user.getEmail());
-                }
-            }
-        });
-    }
+	private void signIn(String email, String password) {
+		if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
 
-    public void goToHomepage(View view)
-    {
-        Intent intent = new Intent(this, Homepage.class);
-        startActivity(intent);
-        overridePendingTransition(R.anim.slide_in_south, R.anim.slide_out_south);
-    }
-    
-    public String createAccount(String email, String username, String password) {
-        if (valid(email) && valid(username) && valid(password)) {
-            Log.d(TAG, "create account:" + email);
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(
-                MainActivity.this,
-                new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        // This is where you would put code for what happens after login
-                    }
-                });
-            // NULL is success
-            return null;
-        } else
-            return "failed";
-    }
-    public void signIn(String email, String password) {
-        if (valid(email) && valid(password)) {
-            mAuth.signInWithEmailAndPassword(email, password);
-        }
-    }
-    public void signOut() { mAuth.signOut(); }
-    public void deleteAccount() {
-        ContentValues values = new ContentValues();
-        values.put("email", mAuth.getCurrentUser().getEmail());
-        if (mAuth.getCurrentUser() != null) {
-            mAuth.getCurrentUser().delete().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task task) {
-                    System.out.println("deleted: " + values.getAsString("email"));
-                }
-            });
-        }
-    }
-    boolean valid(String str) {  return !TextUtils.isEmpty(str); }
+			mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
+				MainActivity.this, new OnCompleteListener<AuthResult>() {
+					@Override
+					public void onComplete(@NonNull Task<AuthResult> task) {
+						if (task.isSuccessful()) {
+							Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
+						} else {
+							// failed to sign in
+							Toast.makeText(MainActivity.this, "Incorrect Login", Toast.LENGTH_LONG).show();
+						}
+					}
+				}
+			);
+		}
+	}
+	
+	private void createUser(final String email, final String password) {
+		if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+			mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(
+				MainActivity.this, new OnCompleteListener<AuthResult>() {
+					@Override
+					public void onComplete(@NonNull Task<AuthResult> task) {
+						if (task.isSuccessful()) {
+							Toast.makeText(MainActivity.this, "Account Created!", Toast.LENGTH_LONG).show();
+							signIn(email, password);
+						} else {
+							// failed create
+						}
+					}
+				});
+		}
+	}
+	
+	private void signOut() {
+		if (mAuth.getCurrentUser() != null)
+			mAuth.signOut();
+	}
+	
+	/*
+		Actions
+	 */
+	public void submitLogin(View view) {
+		TextView emailView = findViewById(R.id.email);
+		TextView passwordView = findViewById(R.id.password);
+		
+		String email = emailView.getText().toString(),
+				password = emailView.getText().toString();
+		emailView.setText("");
+		passwordView.setText("");
+
+		signIn(email, password);
+	}
+	
+	public void signOut(View view) {
+		signOut();
+	}
+	
+	public void submitCreate(View view) {
+		TextView emailView = (TextView) findViewById(R.id.email);
+		TextView passwordView = (TextView) findViewById(R.id.password);
+		
+		String email = emailView.getText().toString(),
+			password = emailView.getText().toString();
+		
+		System.out.println(email + " " + password);
+		emailView.setText("");
+		passwordView.setText("");
+		
+		createUser(email, password);
+	}
 }

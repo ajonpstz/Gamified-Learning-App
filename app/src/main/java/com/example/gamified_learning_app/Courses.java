@@ -16,6 +16,7 @@ import com.example.gamified_learning_app.networkio.NetworkConstants;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class Courses extends AppCompatActivity {
     ImageView load_icon;
     Animation rotate_anim;
     LinearLayout llayout;
+
+    private FirebaseAuth mAuth;
 
     ArrayList<TextView> textViews = new ArrayList<>();
 
@@ -74,6 +77,8 @@ public class Courses extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+
         setContentView(R.layout.activity_courses);
 
         load_icon = new ImageView(getApplicationContext());
@@ -87,13 +92,13 @@ public class Courses extends AppCompatActivity {
         rotate_anim = AnimationUtils.loadAnimation(this,R.anim.rotate);
         load_icon.startAnimation(rotate_anim);
 
-
-
         socket.connect();
     }
 
     public void goToLogin(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        mAuth.signOut();
+
+        Intent intent = new Intent(this, Homepage.class);
         startActivity(intent);
 
         socket.disconnect();

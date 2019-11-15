@@ -6,17 +6,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class Homepage extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
     }
 
 
     public void goToLogin(View view) {
+        mAuth.signOut();
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
