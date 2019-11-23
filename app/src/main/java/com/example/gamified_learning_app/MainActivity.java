@@ -16,30 +16,36 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class MainActivity extends AppCompatActivity {
 	
 	private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+	private boolean signIn = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+
+
+
+
 	}
 	
 	@Override
 	protected void onStart() {
 		super.onStart();
-		mAuth = FirebaseAuth.getInstance();
 		mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
 			@Override
 			public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 				FirebaseUser user = firebaseAuth.getCurrentUser();
 				if (user == null) {
 				} else {
-					Intent intent = new Intent(MainActivity.this, Homepage.class);
-					startActivity(intent);
-					overridePendingTransition(R.anim.slide_in_south, R.anim.slide_out_south);
+					UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName("Test123456").build();
+					user.updateProfile(profileUpdates);
+					signIn = true;
 				}
 			}
 		});
@@ -55,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
 					public void onComplete(@NonNull Task<AuthResult> task) {
 						if (task.isSuccessful()) {
 							Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
+
+							Intent intent = new Intent(MainActivity.this, Homepage.class);
+							startActivity(intent);
+							overridePendingTransition(R.anim.slide_in_south, R.anim.slide_out_south);
 						} else {
 							// failed to sign in
 							Toast.makeText(MainActivity.this, "Incorrect Login", Toast.LENGTH_LONG).show();

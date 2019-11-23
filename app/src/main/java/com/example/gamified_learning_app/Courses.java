@@ -98,7 +98,7 @@ public class Courses extends AppCompatActivity {
     public void goToLogin(View view) {
         mAuth.signOut();
 
-        Intent intent = new Intent(this, Homepage.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 
         socket.disconnect();

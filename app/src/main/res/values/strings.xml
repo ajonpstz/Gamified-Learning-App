@@ -2,4 +2,6 @@
     <string name="app_name">Gamified-Learning-App</string>
     <string name="Lornit">LORNIT</string>
     <string name="Email">Email:</string>
+    <string name="AccountDetails">Account Details</string>
+    <string name="usernameTitle">Username:</string>
 </resources>

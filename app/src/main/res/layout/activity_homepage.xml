@@ -6,78 +6,120 @@
     android:layout_height="match_parent"
     tools:context=".Homepage">
 
-    <LinearLayout
-        android:layout_width="412dp"
-        android:layout_height="731dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-61dp">
 
         <LinearLayout
-            android:id="@+id/rightLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_width="412dp"
+            android:layout_height="86dp">
+
 
             <LinearLayout
-                android:id="@+id/lay1"
+                android:id="@+id/rightLayout"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:layout_weight="1"
                 android:background="@color/colorPrimary"
-                android:gravity="center">
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/user_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <LinearLayout
+                    android:id="@+id/lay1"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/icons8_user" />
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/user_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/icons8_user" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lay2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="goToCourses">
+
+                    <ImageView
+                        android:id="@+id/book_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/icons8_book_shelf" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lay3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="goToLogin">
+
+                    <ImageView
+                        android:id="@+id/logout_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/icons8_logout" />
+                </LinearLayout>
 
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lay2"
-                android:layout_width="fill_parent"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:onClick="goToCourses">
-
-                <ImageView
-                    android:id="@+id/book_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/icons8_book_shelf" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lay3"
-                android:layout_width="fill_parent"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:onClick="goToLogin">
-
-                <ImageView
-                    android:id="@+id/logout_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/icons8_logout" />
-            </LinearLayout>
-
         </LinearLayout>
-    </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:gravity="center"
+            android:orientation="vertical">>
+
+            <TextView
+                android:id="@+id/Account"
+                android:layout_width="350dp"
+                android:layout_height="68dp"
+                android:background="@drawable/text_border"
+                android:gravity="center"
+                android:text="@string/AccountDetails"
+                android:textAllCaps="false"
+                android:textColor="@color/colorText"
+                android:textSize="50sp"
+                app:fontFamily="@font/advent_pro" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/usernameTitle"
+                android:layout_width="173dp"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:text="@string/usernameTitle"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
