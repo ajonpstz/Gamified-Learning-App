@@ -4,4 +4,9 @@
     <string name="Email">Email:</string>
     <string name="AccountDetails">Account Details</string>
     <string name="usernameTitle">Username:</string>
+    <string name="pointTitle">Score:</string>
+    <string name="correctTasksTitle">Successful Tasks:</string>
+    <string name="attemptedTitle">All Tasks:</string>
+    <string name="emailTitle">Email:</string>
+    <string name="SuccessRateTitle">Success Rate:</string>
 </resources>

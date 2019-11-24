@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class Homepage extends AppCompatActivity {
@@ -29,17 +32,41 @@ public class Homepage extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        TextView userName = findViewById(R.id.userName);
 
         // Check if user is signed in (non-null) and update UI accordingly.
-
         mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user == null) {
                 } else {
+                    TextView userName = findViewById(R.id.userName);
                     userName.setText(user.getDisplayName());
+
+                    FirebaseFirestore mDatabase = FirebaseFirestore.getInstance();
+
+                    TextView successfulTasks = findViewById(R.id.successfulTasks);
+                    TextView attempted = findViewById(R.id.attempted);
+                    TextView rate = findViewById(R.id.rate);
+
+                    DocumentReference userDetails = mDatabase.collection("userData").document(user.getUid());
+                    userDetails.get()
+                            .addOnSuccessListener(snapshot ->{
+                                successfulTasks.setText(Long.toString(snapshot.getLong("correctTasks")));
+                                attempted.setText(Long.toString(snapshot.getLong("attemptedTasks")));
+
+                                // calculate success rate
+                                double percentage;
+                                if(!attempted.getText().toString().equals("0"))
+                                {
+                                    percentage = Double.parseDouble(successfulTasks.getText().toString()) / Integer.parseInt(attempted.getText().toString()) * 100.00;
+                                }
+                                else
+                                {
+                                    percentage = 0;
+                                }
+                                rate.setText(String.format("%.2f", percentage) + "%");
+                            });
                 }
             }
         });
