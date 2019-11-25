@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -21,46 +23,28 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 public class MainActivity extends AppCompatActivity {
 	
 	private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-	private boolean signIn = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-
-
-
-
 	}
 	
 	@Override
 	protected void onStart() {
 		super.onStart();
-		mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-			@Override
-			public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-				FirebaseUser user = firebaseAuth.getCurrentUser();
-				if (user == null) {
-				} else {
-					UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName("Test123456").build();
-					user.updateProfile(profileUpdates);
-					signIn = true;
-				}
-			}
-		});
-		
 	}
 
 	private void signIn(String email, String password) {
 		if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-
 			mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
 				MainActivity.this, new OnCompleteListener<AuthResult>() {
 					@Override
 					public void onComplete(@NonNull Task<AuthResult> task) {
 						if (task.isSuccessful()) {
 							Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
+
+
 
 							Intent intent = new Intent(MainActivity.this, Homepage.class);
 							startActivity(intent);
