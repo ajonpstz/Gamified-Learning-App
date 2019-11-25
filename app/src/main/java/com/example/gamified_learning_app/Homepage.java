@@ -40,9 +40,13 @@ public class Homepage extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user == null) {
                 } else {
+                    // values that dont use firestore
                     TextView userName = findViewById(R.id.userName);
+                    TextView email = findViewById(R.id.email);
                     userName.setText(user.getDisplayName());
+                    email.setText(user.getEmail());
 
+                    // values that do need firestore
                     FirebaseFirestore mDatabase = FirebaseFirestore.getInstance();
 
                     TextView successfulTasks = findViewById(R.id.successfulTasks);
@@ -50,23 +54,23 @@ public class Homepage extends AppCompatActivity {
                     TextView rate = findViewById(R.id.rate);
 
                     DocumentReference userDetails = mDatabase.collection("userData").document(user.getUid());
-                    userDetails.get()
-                            .addOnSuccessListener(snapshot ->{
-                                successfulTasks.setText(Long.toString(snapshot.getLong("correctTasks")));
-                                attempted.setText(Long.toString(snapshot.getLong("attemptedTasks")));
+                    userDetails.get().addOnSuccessListener(snapshot ->
+                    {
+                        successfulTasks.setText(Long.toString(snapshot.getLong("correctTasks")));
+                        attempted.setText(Long.toString(snapshot.getLong("attemptedTasks")));
 
-                                // calculate success rate
-                                double percentage;
-                                if(!attempted.getText().toString().equals("0"))
-                                {
-                                    percentage = Double.parseDouble(successfulTasks.getText().toString()) / Integer.parseInt(attempted.getText().toString()) * 100.00;
-                                }
-                                else
-                                {
-                                    percentage = 0;
-                                }
-                                rate.setText(String.format("%.2f", percentage) + "%");
-                            });
+                        // calculate success rate
+                        double percentage;
+                        if(!attempted.getText().toString().equals("0"))
+                        {
+                            percentage = Double.parseDouble(successfulTasks.getText().toString()) / Integer.parseInt(attempted.getText().toString()) * 100.00;
+                        }
+                        else
+                        {
+                            percentage = 0;
+                        }
+                        rate.setText(String.format("%.2f", percentage) + "%");
+                    });
                 }
             }
         });
