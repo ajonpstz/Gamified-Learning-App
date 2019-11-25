@@ -115,6 +115,10 @@
                 android:id="@+id/userName"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeMaxTextSize="100sp"
+                android:autoSizeStepGranularity="2sp"
                 android:ems="4"
                 android:gravity="right"
                 android:textSize="25sp" />
@@ -138,6 +142,10 @@
                 android:id="@+id/successfulTasks"
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeMaxTextSize="100sp"
+                android:autoSizeStepGranularity="2sp"
                 android:ems="4"
                 android:gravity="right"
                 android:textSize="25sp" />
@@ -161,6 +169,10 @@
                 android:id="@+id/attempted"
                 android:layout_width="236dp"
                 android:layout_height="46dp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeMaxTextSize="100sp"
+                android:autoSizeStepGranularity="2sp"
                 android:ems="4"
                 android:textSize="25sp"
                 android:gravity="right"/>
@@ -207,6 +219,10 @@
                 android:id="@+id/email"
                 android:layout_width="276dp"
                 android:layout_height="46dp"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeMaxTextSize="100sp"
+                android:autoSizeStepGranularity="2sp"
                 android:ems="4"
                 android:gravity="right"
                 android:textSize="25sp" />

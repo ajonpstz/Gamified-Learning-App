@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
 						if (task.isSuccessful()) {
 							Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
 
-
-
 							Intent intent = new Intent(MainActivity.this, Homepage.class);
 							startActivity(intent);
 							overridePendingTransition(R.anim.slide_in_south, R.anim.slide_out_south);
@@ -89,28 +87,22 @@ public class MainActivity extends AppCompatActivity {
 		TextView passwordView = findViewById(R.id.password);
 		
 		String email = emailView.getText().toString(),
-				password = emailView.getText().toString();
+				password = passwordView.getText().toString();
 		emailView.setText("");
 		passwordView.setText("");
 
 		signIn(email, password);
+	}
+
+	public void gotoCreateAccount(View view){
+		Intent intent = new Intent(this, CreateAccount.class);
+		startActivity(intent);
+		overridePendingTransition(0, 0);
 	}
 	
 	public void signOut(View view) {
 		signOut();
 	}
 	
-	public void submitCreate(View view) {
-		TextView emailView = (TextView) findViewById(R.id.email);
-		TextView passwordView = (TextView) findViewById(R.id.password);
-		
-		String email = emailView.getText().toString(),
-			password = emailView.getText().toString();
-		
-		System.out.println(email + " " + password);
-		emailView.setText("");
-		passwordView.setText("");
-		
-		createUser(email, password);
-	}
+
 }

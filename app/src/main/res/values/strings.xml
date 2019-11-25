@@ -17,4 +17,7 @@
     <string name="prompt_newPassword2">Re-Enter New Password</string>
     <string name="goBack">Go Back</string>
     <string name="prompt_oldPassword">Current Password</string>
+    <string name="prompt_Username">Username</string>
+    <string name="prompt_password2">Re-Enter Password</string>
+    <string name="createAccount">Create Account</string>
 </resources>
