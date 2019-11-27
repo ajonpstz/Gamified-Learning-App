@@ -90,4 +90,10 @@ public class Homepage extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
+
+    public void goToChangeEmail(View view){
+        Intent intent = new Intent(this, ChangeEmail.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+    }
 }
