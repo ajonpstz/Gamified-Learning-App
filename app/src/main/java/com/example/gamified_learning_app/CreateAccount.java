@@ -36,8 +36,6 @@ public class CreateAccount extends AppCompatActivity
         // attempt to create user
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task ->{
            if(task.isSuccessful()){
-               Toast.makeText(CreateAccount.this, "Login Successful!", Toast.LENGTH_LONG).show();
-
                // give username
                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(username).build();
                mAuth.getCurrentUser().updateProfile(profileUpdates);
@@ -50,10 +48,11 @@ public class CreateAccount extends AppCompatActivity
                userData.put("correctTasks", 0);
                userDetails.set(userData);
 
-               // go to homepage
-               Intent intent = new Intent(CreateAccount.this, Homepage.class);
-               startActivity(intent);
-               overridePendingTransition(R.anim.slide_in_south, R.anim.slide_out_south);
+               // send email verification
+               mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(sentEmail ->{
+                  if(sentEmail.isSuccessful())Toast.makeText(CreateAccount.this, "Verification Email Sent", Toast.LENGTH_LONG).show();
+                  else Toast.makeText(CreateAccount.this, "Failed to send Email", Toast.LENGTH_LONG).show();
+               });
            }
         });
     }
@@ -71,13 +70,19 @@ public class CreateAccount extends AppCompatActivity
                 password2 = password2View.getText().toString();
 
         // check if any strings are empty
-        if(email.isEmpty()) Toast.makeText(CreateAccount.this, "Fill out an Email", Toast.LENGTH_LONG).show();
-        else if(username.isEmpty()) Toast.makeText(CreateAccount.this, "Create a Username", Toast.LENGTH_LONG).show();
+        if(username.isEmpty()) Toast.makeText(CreateAccount.this, "Create a Username", Toast.LENGTH_LONG).show();
+        else if(email.isEmpty()) Toast.makeText(CreateAccount.this, "Fill out an Email", Toast.LENGTH_LONG).show();
         else if(password.isEmpty()) Toast.makeText(CreateAccount.this, "Create a Password", Toast.LENGTH_LONG).show();
         else if(password2.isEmpty()) Toast.makeText(CreateAccount.this, "Retype your Password", Toast.LENGTH_LONG).show();
         // check if passwords match
         else if(!password.equals(password2)) Toast.makeText(CreateAccount.this, "Passwords Don't Match", Toast.LENGTH_LONG).show();
-        else createUser(email, username, password, password2);
+        else{
+            usernameView.setText("");
+            emailView.setText("");
+            passwordView.setText("");
+            password2View.setText("");
+            createUser(email, username, password, password2);
+        }
     }
 
     // go back to login page

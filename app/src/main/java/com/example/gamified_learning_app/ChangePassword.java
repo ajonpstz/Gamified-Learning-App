@@ -42,10 +42,8 @@ public class ChangePassword extends AppCompatActivity
         user = mAuth.getCurrentUser();
     }
 
+    // check if passwords arem't empty, are matching, and meet minimum requirements
     public void submitChangePass(View view) {
-        ProgressBar loading = findViewById(R.id.loading);
-        loading.setProgress(1);
-
         TextView newPass1View = findViewById(R.id.newPass1);
         TextView newPass2View = findViewById(R.id.newPass2);
 
@@ -74,7 +72,6 @@ public class ChangePassword extends AppCompatActivity
                             doc.put("password", newPass1);
 
                             userDetails.set(doc, SetOptions.merge());
-
                         } else {
                             Toast.makeText(ChangePassword.this, "Error, unable to change password.", Toast.LENGTH_LONG).show();
                         }
@@ -89,11 +86,10 @@ public class ChangePassword extends AppCompatActivity
         }
     }
 
+    // goes back to homepage
     public void goBack(View view){
         Intent intent = new Intent(this, Homepage.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
     }
-
-
 }

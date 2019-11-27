@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onStart();
 	}
 
+	// attempts to sign in the user using the given email and pass, then checks if they're email is authorized
 	private void signIn(String email, String password) {
 		if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
 			mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
@@ -42,11 +43,19 @@ public class MainActivity extends AppCompatActivity {
 					@Override
 					public void onComplete(@NonNull Task<AuthResult> task) {
 						if (task.isSuccessful()) {
-							Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
 
-							Intent intent = new Intent(MainActivity.this, Homepage.class);
-							startActivity(intent);
-							overridePendingTransition(R.anim.slide_in_south, R.anim.slide_out_south);
+							// check if they activated account
+							if(mAuth.getCurrentUser().isEmailVerified()) {
+								Toast.makeText(MainActivity.this, "Login Successful!", Toast.LENGTH_LONG).show();
+
+								Intent intent = new Intent(MainActivity.this, Homepage.class);
+								startActivity(intent);
+								overridePendingTransition(R.anim.slide_in_south, R.anim.slide_out_south);
+							}
+							else{
+								Toast.makeText(MainActivity.this, "Email has not been verified \nresending activation email", Toast.LENGTH_LONG).show();
+								mAuth.getCurrentUser().sendEmailVerification();
+							}
 						} else {
 							// failed to sign in
 							Toast.makeText(MainActivity.this, "Incorrect Login", Toast.LENGTH_LONG).show();
@@ -56,29 +65,7 @@ public class MainActivity extends AppCompatActivity {
 			);
 		}
 	}
-	
-	private void createUser(final String email, final String password) {
-		if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-			mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(
-				MainActivity.this, new OnCompleteListener<AuthResult>() {
-					@Override
-					public void onComplete(@NonNull Task<AuthResult> task) {
-						if (task.isSuccessful()) {
-							Toast.makeText(MainActivity.this, "Account Created!", Toast.LENGTH_LONG).show();
-							signIn(email, password);
-						} else {
-							// failed create
-						}
-					}
-				});
-		}
-	}
-	
-	private void signOut() {
-		if (mAuth.getCurrentUser() != null)
-			mAuth.signOut();
-	}
-	
+
 	/*
 		Actions
 	 */
@@ -98,10 +85,6 @@ public class MainActivity extends AppCompatActivity {
 		Intent intent = new Intent(this, CreateAccount.class);
 		startActivity(intent);
 		overridePendingTransition(0, 0);
-	}
-	
-	public void signOut(View view) {
-		signOut();
 	}
 	
 

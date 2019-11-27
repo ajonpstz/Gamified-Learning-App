@@ -20,4 +20,6 @@
     <string name="prompt_Username">Username</string>
     <string name="prompt_password2">Re-Enter Password</string>
     <string name="createAccount">Create Account</string>
+    <string name="prompt_newEmail">New Email</string>
+    <string name="updateEmail">Update Email</string>
 </resources>
