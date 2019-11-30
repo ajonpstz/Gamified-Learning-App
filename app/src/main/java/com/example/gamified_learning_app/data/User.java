@@ -1,13 +1,20 @@
 package com.example.gamified_learning_app.data;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import com.google.firebase.firestore.IgnoreExtraProperties;
 
-public class User implements Serializable {
-    public String  userName,
-            description,
-            email;
-    public Date    dateJoined;
-    public List<TaskList> taskLists;
+@IgnoreExtraProperties
+public class User {
+    public String username;
+    public String email;
+    public String description;
+    
+    public User(String email, String username) {
+        this(email,username,"");
+    }
+    
+    public User(String email, String username, String description) {
+        this.username = username;
+        this.email = email;
+        this.description = description;
+    }
 }

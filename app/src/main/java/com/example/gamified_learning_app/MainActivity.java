@@ -1,9 +1,5 @@
 package com.example.gamified_learning_app;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,12 +9,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 	
@@ -89,3 +84,28 @@ public class MainActivity extends AppCompatActivity {
 	
 
 }
+
+
+/*
+TODO: Create Firebase Auth Manager
+	- Login             O
+	- Logout            O
+	- Create Account    X
+	- Check Account     O
+	
+TODO: Create Firebase Data Manager
+	- Connect to Manager
+	- Get
+		- Task
+		- TaskList
+		- User
+			- Create                0
+			- Get                   0
+			- Update                0
+		- Badge
+		- Memorization List
+	- Write all of the above
+	
+TODO: Create a server that does the scheduling (or we can schedule locally)
+TODO: Create an economy
+ */
