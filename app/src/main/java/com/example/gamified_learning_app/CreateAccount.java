@@ -2,22 +2,22 @@
 
 package com.example.gamified_learning_app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class CreateAccount extends AppCompatActivity
 {
@@ -35,6 +35,7 @@ public class CreateAccount extends AppCompatActivity
     {
         // attempt to create user
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task ->{
+            Log.e("DEBUG", "COMPLETED");
            if(task.isSuccessful()){
                // give username
                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(username).build();
@@ -47,10 +48,10 @@ public class CreateAccount extends AppCompatActivity
                userData.put("attemptedTasks", 0);
                userData.put("correctTasks", 0);
                userDetails.set(userData);
-
+               
                // send email verification
                mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(sentEmail ->{
-                  if(sentEmail.isSuccessful())Toast.makeText(CreateAccount.this, "Verification Email Sent", Toast.LENGTH_LONG).show();
+                  if(sentEmail.isSuccessful()) Toast.makeText(CreateAccount.this, "Verification Email Sent", Toast.LENGTH_LONG).show();
                   else Toast.makeText(CreateAccount.this, "Failed to send Email", Toast.LENGTH_LONG).show();
                });
            }
@@ -63,11 +64,15 @@ public class CreateAccount extends AppCompatActivity
                 usernameView = findViewById(R.id.username),
                 passwordView = findViewById(R.id.newPass1),
                 password2View = findViewById(R.id.newPass2);
-
         String email = emailView.getText().toString(),
                 username = usernameView.getText().toString(),
                 password = passwordView.getText().toString(),
                 password2 = password2View.getText().toString();
+    
+    
+        Log.e("DEBUG", "email = " + email);
+        Log.e("DEBUG", "username = " + username);
+        Log.e("DEBUG", "password = " + password);
 
         // check if any strings are empty
         if(username.isEmpty()) Toast.makeText(CreateAccount.this, "Create a Username", Toast.LENGTH_LONG).show();
@@ -81,6 +86,8 @@ public class CreateAccount extends AppCompatActivity
             emailView.setText("");
             passwordView.setText("");
             password2View.setText("");
+    
+            Toast.makeText(CreateAccount.this, "Email is being sent", Toast.LENGTH_LONG).show();
             createUser(email, username, password, password2);
         }
     }
