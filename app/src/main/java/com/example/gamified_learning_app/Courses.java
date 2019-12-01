@@ -106,6 +106,17 @@ public class Courses extends AppCompatActivity {
                 });
 
             }
+            runOnUiThread(()->{
+                LinearLayout ll = (LinearLayout) findViewById(R.id.scrollLayout);
+                Button b = new Button(getApplicationContext());
+                b.setText("ADD SET");
+                b.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorText));
+                b.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent_secondary));
+                b.setPadding(50,50,50,50);
+                b.setTextSize(20);
+                //b.setBackgroundResource(R.drawable.text_border);
+                ll.addView(b);
+            });
             return null;
         }, e->{
             return null;
