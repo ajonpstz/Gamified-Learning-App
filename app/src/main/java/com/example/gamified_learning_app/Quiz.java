@@ -118,6 +118,7 @@ public class Quiz extends AppCompatActivity {
 
             Calendar calendar = Calendar.getInstance();
             Courses.activeSet.add(new CardSet.Event(calendar.getTime(), (double)correct/(double)Courses.activeSet.cards.size(), 0.0));
+            //UPDATE SET to server
         }
         else {
 
