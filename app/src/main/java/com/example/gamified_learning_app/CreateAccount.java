@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
@@ -16,8 +18,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class CreateAccount extends AppCompatActivity
 {
@@ -79,7 +79,7 @@ public class CreateAccount extends AppCompatActivity
         else if(email.isEmpty()) Toast.makeText(CreateAccount.this, "Fill out an Email", Toast.LENGTH_LONG).show();
         else if(password.isEmpty()) Toast.makeText(CreateAccount.this, "Create a Password", Toast.LENGTH_LONG).show();
         else if(password2.isEmpty()) Toast.makeText(CreateAccount.this, "Retype your Password", Toast.LENGTH_LONG).show();
-        // check if passwords match
+        // check if passwords match q
         else if(!password.equals(password2)) Toast.makeText(CreateAccount.this, "Passwords Don't Match", Toast.LENGTH_LONG).show();
         else{
             usernameView.setText("");
