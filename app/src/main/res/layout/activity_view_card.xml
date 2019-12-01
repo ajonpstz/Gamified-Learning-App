@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context=".ViewCard">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/rightLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/lay1"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:onClick="goToHomepage">
+
+                <ImageView
+                    android:id="@+id/user_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/icons8_user" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lay2"
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/book_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/icons8_book_shelf" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lay3"
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:onClick="goToLogin">
+
+                <ImageView
+                    android:id="@+id/logout_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/icons8_logout" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/mainScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/scrollLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

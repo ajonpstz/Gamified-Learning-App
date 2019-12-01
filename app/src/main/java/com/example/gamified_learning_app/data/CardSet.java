@@ -15,7 +15,7 @@ public class CardSet {
 		public String term;
 		public String definition;
 		
-		Card(String term, String definition) {
+		public Card(String term, String definition) {
 			this.term = term;
 			this.definition = definition;
 		}

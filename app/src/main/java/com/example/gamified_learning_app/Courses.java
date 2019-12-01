@@ -11,8 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.example.gamified_learning_app.course.Card;
-import com.example.gamified_learning_app.course.Course;
+import com.example.gamified_learning_app.data.CardSet;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -22,50 +21,56 @@ import java.util.Arrays;
 public class Courses extends AppCompatActivity {
 
     LinearLayout llayout;
-    //ScrollView scrollView;
-
     private FirebaseAuth mAuth;
-
     ArrayList<TextView> textViews = new ArrayList<>();
-
-    ArrayList<Course> courseList;
-
+    ArrayList<CardSet> cardSetList;
     Button buttonHighlighted = null;
+
+    public static CardSet activeSet = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        courseList = new ArrayList<Course>();
+        cardSetList = new ArrayList<CardSet>();
 
         //temporary local data for experimentation
-        Card numberCards[] = new Card[] {
-                new Card("one","1"),
-                new Card("two", "2"),
-                new Card("three", "3"),
-                new Card("four", "4")
+        CardSet.Card numberCards[] = new CardSet.Card[] {
+                new CardSet.Card("one","1"),
+                new CardSet.Card("two", "2"),
+                new CardSet.Card("three", "3"),
+                new CardSet.Card("four", "4")
         };
-        Card osCards[] = new Card[] {
-                new Card("access method","The method that is used to find a file, a record, or a set of records."),
-                new Card("application programming interface (API)", "A standardized library of programming tools used by software developers to write applications that are compatible with a specific operating system or graphic user interface."),
-                new Card("asynchronous operation", "An operation that occurs without a regular or predictable time relationship to a specified event, for example, the calling of an error diagnostic routine that may receive control at any time during the execution of a computer program."),
-                new Card("Beowulf", "Defines a class of clustered computing that focuses on minimizing the price-to-performance ratio of the overall system without compromising its ability to perform the computation work for which it is being built. Most Beowulf systems are implemented on Linux computers.")
+        CardSet.Card osCards[] = new CardSet.Card[] {
+                new CardSet.Card("access method","The method that is used to find a file, a record, or a set of records."),
+                new CardSet.Card("application programming interface (API)", "A standardized library of programming tools used by software developers to write applications that are compatible with a specific operating system or graphic user interface."),
+                new CardSet.Card("asynchronous operation", "An operation that occurs without a regular or predictable time relationship to a specified event, for example, the calling of an error diagnostic routine that may receive control at any time during the execution of a computer program."),
+                new CardSet.Card("Beowulf", "Defines a class of clustered computing that focuses on minimizing the price-to-performance ratio of the overall system without compromising its ability to perform the computation work for which it is being built. Most Beowulf systems are implemented on Linux computers.")
         };
 
-        courseList.add(new Course("Numbers", new ArrayList<Card>(Arrays.asList(numberCards))));
-        courseList.add(new Course("Operating System1", new ArrayList<Card>(Arrays.asList(osCards))));
-        courseList.add(new Course("Operating System2", new ArrayList<Card>(Arrays.asList(osCards))));
-        courseList.add(new Course("Operating System3", new ArrayList<Card>(Arrays.asList(osCards))));
-        courseList.add(new Course("Operating System4", new ArrayList<Card>(Arrays.asList(osCards))));
-        courseList.add(new Course("Operating System5", new ArrayList<Card>(Arrays.asList(osCards))));
-        courseList.add(new Course("Operating System6", new ArrayList<Card>(Arrays.asList(osCards))));
-        courseList.add(new Course("Operating System7", new ArrayList<Card>(Arrays.asList(osCards))));
-        courseList.add(new Course("Operating System8", new ArrayList<Card>(Arrays.asList(osCards))));
-        courseList.add(new Course("Operating System9", new ArrayList<Card>(Arrays.asList(osCards))));
-        courseList.add(new Course("Operating System10", new ArrayList<Card>(Arrays.asList(osCards))));
-        courseList.add(new Course("Operating System11", new ArrayList<Card>(Arrays.asList(osCards))));
-
-        Course.ActiveCourse = courseList.get(1);
+        //(String owner, String name, String description, List<Event> history, List<Card> cards)
+        cardSetList.add(new CardSet("owner", "Numbers", "description", null,
+                new ArrayList<CardSet.Card>(Arrays.asList(numberCards))));
+        cardSetList.add(new CardSet("owner", "Operating System", "description", null,
+                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
+        cardSetList.add(new CardSet("owner", "Operating System2", "description", null,
+                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
+        cardSetList.add(new CardSet("owner", "Operating System3", "description", null,
+                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
+        cardSetList.add(new CardSet("owner", "Operating System4", "description", null,
+                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
+        cardSetList.add(new CardSet("owner", "Operating System5", "description", null,
+                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
+        cardSetList.add(new CardSet("owner", "Operating System6", "description", null,
+                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
+        cardSetList.add(new CardSet("owner", "Operating System7", "description", null,
+                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
+        cardSetList.add(new CardSet("owner", "Operating System8", "description", null,
+                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
+        cardSetList.add(new CardSet("owner", "Operating System9", "description", null,
+                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
+        cardSetList.add(new CardSet("owner", "Operating System10", "description", null,
+                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
 
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_courses);
@@ -73,15 +78,16 @@ public class Courses extends AppCompatActivity {
         //scrollView = (ScrollView) findViewById(R.id.mainScroll);
 
 
-        for (int i = 0 ; i < courseList.size(); i++){
+        for (int i = 0; i < cardSetList.size(); i++){
             Button b = new Button(getApplicationContext());
-            b.setText(courseList.get(i).getTitle());
+            b.setText(cardSetList.get(i).name);
             b.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorText));
             b.setPadding(50,50,50,50);
             b.setTextSize(20);
             b.setBackgroundResource(R.drawable.text_border);
 
-            final String msg = courseList.get(i).getTitle();
+            final String msg = cardSetList.get(i).name;
+            final int index = i;
 
             b.setOnClickListener(v -> {
                 System.out.println(msg);
@@ -91,6 +97,7 @@ public class Courses extends AppCompatActivity {
                     buttonHighlighted.setBackgroundResource(R.drawable.text_border);
                 }
                 buttonHighlighted = b;
+                activeSet = cardSetList.get(index);
                 b.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent));
                 startActivity(new Intent(Courses.this, CourseOptionsPopup.class));
 

@@ -45,8 +45,13 @@ public class CourseOptionsPopup extends Activity {
     }
 
     public void goToCards(View view) {
-
         Intent intent = new Intent(this, CardsActivity.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+    }
+
+    public void goToViewCard(View view){
+        Intent intent = new Intent(this, ViewCard.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
     }

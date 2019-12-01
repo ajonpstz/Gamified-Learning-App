@@ -7,17 +7,14 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.gamified_learning_app.course.Card;
-import com.example.gamified_learning_app.course.Course;
-
-import java.util.ArrayList;
+import com.example.gamified_learning_app.data.CardSet;
 
 public class CardsActivity extends AppCompatActivity {
 
     private boolean term;
     private int cardNumber;
-    private ArrayList<Card> cardDeck;
-    private Card currentCard;
+    private CardSet cardDeck;
+    private CardSet.Card currentCard;
 
     private Button cardButton;
 
@@ -27,26 +24,26 @@ public class CardsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cards);
         cardButton = (Button) findViewById(R.id.card);
 
-        if (Course.ActiveCourse == null) {
+        if (Courses.activeSet == null) {
             return;
         }else{
-            cardDeck = Course.ActiveCourse.getCardDeck();
-            if (cardDeck == null || cardDeck.size() == 0) return;
+            cardDeck = Courses.activeSet;
+            if (cardDeck == null || cardDeck.cards.size() == 0) return;
             term = true;
             cardNumber = 0;
-            currentCard = cardDeck.get(cardNumber);
+            currentCard = cardDeck.cards.get(cardNumber);
             setCardText();
         }
     }
 
     private void setCardText(){
-        currentCard = cardDeck.get(cardNumber);
+        currentCard = cardDeck.cards.get(cardNumber);
 
         if (term){
-            cardButton.setText(currentCard.getTerm());
+            cardButton.setText(currentCard.term);
         }
         else {
-            cardButton.setText(currentCard.getDefinition());
+            cardButton.setText(currentCard.definition);
         }
     }
 
@@ -54,6 +51,7 @@ public class CardsActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        overridePendingTransition(0, 0);
 
     }
 
@@ -76,7 +74,7 @@ public class CardsActivity extends AppCompatActivity {
     }
 
     public void nextCard(View view){
-        if (cardNumber+1 < cardDeck.size()){
+        if (cardNumber+1 < cardDeck.cards.size()){
             cardNumber++;
             term = true;
             setCardText();
