@@ -1,6 +1,7 @@
 package com.example.gamified_learning_app;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,8 @@ public class Courses extends AppCompatActivity {
     ArrayList<TextView> textViews = new ArrayList<>();
 
     ArrayList<Course> courseList;
+
+    Button buttonHighlighted = null;
 
 
     @Override
@@ -82,7 +85,13 @@ public class Courses extends AppCompatActivity {
 
             b.setOnClickListener(v -> {
                 System.out.println(msg);
-
+                if (buttonHighlighted != null){
+                    //un-Highlight
+                    buttonHighlighted.setBackgroundColor(Color.TRANSPARENT);
+                    buttonHighlighted.setBackgroundResource(R.drawable.text_border);
+                }
+                buttonHighlighted = b;
+                b.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent));
                 startActivity(new Intent(Courses.this, CourseOptionsPopup.class));
 
             });
