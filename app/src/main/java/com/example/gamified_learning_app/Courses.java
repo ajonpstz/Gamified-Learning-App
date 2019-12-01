@@ -34,6 +34,8 @@ public class Courses extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         courseList = new ArrayList<Course>();
+
+        //temporary local data for experimentation
         Card numberCards[] = new Card[] {
                 new Card("one","1"),
                 new Card("two", "2"),
@@ -60,11 +62,7 @@ public class Courses extends AppCompatActivity {
         courseList.add(new Course("Operating System10", new ArrayList<Card>(Arrays.asList(osCards))));
         courseList.add(new Course("Operating System11", new ArrayList<Card>(Arrays.asList(osCards))));
 
-
-
-
-
-
+        Course.ActiveCourse = courseList.get(1);
 
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_courses);
@@ -81,8 +79,10 @@ public class Courses extends AppCompatActivity {
             b.setBackgroundResource(R.drawable.text_border);
 
             final String msg = courseList.get(i).getTitle();
+
             b.setOnClickListener(v -> {
                 System.out.println(msg);
+
                 startActivity(new Intent(Courses.this, CourseOptionsPopup.class));
 
             });
@@ -90,6 +90,8 @@ public class Courses extends AppCompatActivity {
             llayout.addView(b);
         }
     }
+
+
 
     public void goToLogin(View view) {
         mAuth.signOut();

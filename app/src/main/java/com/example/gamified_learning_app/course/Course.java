@@ -15,4 +15,7 @@ public class Course {
     public ArrayList<Card> getCardDeck(){return this.cardDeck;}
 
 
+    public static Course ActiveCourse = null;
+
+
 }

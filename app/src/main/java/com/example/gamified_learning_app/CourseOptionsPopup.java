@@ -1,9 +1,11 @@
 package com.example.gamified_learning_app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
@@ -40,7 +42,16 @@ public class CourseOptionsPopup extends Activity {
         System.out.println("lp:");
         //d.show();
         getWindow().setAttributes(lp);
-
-
     }
+
+    public void goToCards(View view) {
+
+        Intent intent = new Intent(this, CardsActivity.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+    }
+
+
+
+
 }
