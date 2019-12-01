@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.gamified_learning_app.data.CardSet;
 import com.google.android.material.textfield.TextInputEditText;
@@ -19,15 +21,16 @@ public class Quiz extends AppCompatActivity {
     private int correct = 0;
     private int incorrect = 0;
 
-    private TextView correctCount, incorrectCount;
+    private TextView remainingCount, completedCount, percentage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        correctCount = (TextView) findViewById(R.id.correctCount);
-        incorrectCount = (TextView) findViewById(R.id.incorrectCount);
+        remainingCount = (TextView) findViewById(R.id.remainingCount);
+        completedCount = (TextView) findViewById(R.id.completedCount);
+        percentage = (TextView) findViewById(R.id.percentageText);
 
         if (Courses.activeSet == null) {
             return;
@@ -45,7 +48,17 @@ public class Quiz extends AppCompatActivity {
         TextInputEditText tiet = (TextInputEditText) findViewById(R.id.answer);
         currentCard = cardDeck.cards.get(cardNumber);
         defText.setText(currentCard.definition);
+        completedCount.setText(Integer.toString(cardNumber));
+        remainingCount.setText(Integer.toString(cardDeck.cards.size() - cardNumber));
+        if (correct+incorrect == 0){
+            percentage.setText("");
+        }
+        else {
+            percentage.setText(Integer.toString((int)Math.round(100.0*((double)correct/(double)(correct+incorrect)))) + "%");
+        }
+
         tiet.setText("");
+
     }
 
     public void onEnter(View view){
@@ -69,17 +82,45 @@ public class Quiz extends AppCompatActivity {
             incorrect++;
         }
 
-        correctCount.setText(Integer.toString(correct));
-        incorrectCount.setText(Integer.toString(incorrect));
+
 
         if (cardNumber+1 >= cardDeck.cards.size()){
             //end of deck
             enterImage.setVisibility(View.GONE);
+            remainingCount.setText("0");
+            completedCount.setText(Integer.toString(cardDeck.cards.size()));
+            int per = (int)Math.round(100*(double)correct/(double)cardDeck.cards.size());
+
+            percentage.setText(Integer.toString(per) + "%");
+
+            TextView conclusion = new TextView(getApplicationContext());
+
+            String badge = "You have not gained any achievements in "+ cardDeck.name + ".";
+
+            if (per >= 95){//gold
+                badge = "You have gained a Gold Badge in " + cardDeck.name + ".";
+            }
+            else if (per >= 90){//silver
+                badge = "You have gained a Silver Badge in " + cardDeck.name + ".";
+            }else if (per >= 85){//bronze
+                badge = "You have gained a Bronze Badge in " + cardDeck.name + ".";
+            }
+
+            conclusion.setText(badge);
+            conclusion.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorText));
+            conclusion.setPadding(50,50,50,50);
+            conclusion.setTextSize(20);
+
+            LinearLayout ll = (LinearLayout) findViewById(R.id.scrollLayout);
+            ll.addView(conclusion);
+
 
         }
         else {
+
             cardNumber++;
             setDefinitionText();
+
         }
 
 

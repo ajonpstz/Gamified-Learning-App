@@ -36,11 +36,11 @@ public class Courses extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         llayout = (LinearLayout) findViewById(R.id.scrollLayout);
-        
+
         setContentView(R.layout.activity_courses);
 
         //scrollView = (ScrollView) findViewById(R.id.mainScroll);
-        
+
         FirebaseDBManager.getCardSet(mAuth.getCurrentUser().getDisplayName(), cardSets -> {
             cardSetList.addAll(cardSets);
             for (int i = 0; i < cardSetList.size(); i++){
@@ -50,10 +50,10 @@ public class Courses extends AppCompatActivity {
                 b.setPadding(50,50,50,50);
                 b.setTextSize(20);
                 b.setBackgroundResource(R.drawable.text_border);
-        
+
                 final String msg = cardSetList.get(i).name;
                 final int index = i;
-        
+
                 b.setOnClickListener(v -> {
                     System.out.println(msg);
                     if (buttonHighlighted != null){
@@ -65,7 +65,7 @@ public class Courses extends AppCompatActivity {
                     activeSet = cardSetList.get(index);
                     b.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent));
                     startActivity(new Intent(Courses.this, CourseOptionsPopup.class));
-            
+
                 });
                 runOnUiThread(()->{
                     LinearLayout ll = (LinearLayout) findViewById(R.id.scrollLayout);
@@ -73,6 +73,17 @@ public class Courses extends AppCompatActivity {
                 });
 
             }
+            runOnUiThread(()->{
+                LinearLayout ll = (LinearLayout) findViewById(R.id.scrollLayout);
+                Button b = new Button(getApplicationContext());
+                b.setText("ADD SET");
+                b.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorText));
+                b.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent_secondary));
+                b.setPadding(50,50,50,50);
+                b.setTextSize(20);
+                //b.setBackgroundResource(R.drawable.text_border);
+                ll.addView(b);
+            });
             return null;
         }, e->{
             return null;
