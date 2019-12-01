@@ -8,15 +8,15 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.example.gamified_learning_app.data.CardSet;
 import com.example.gamified_learning_app.tool.FirebaseDBManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 
 public class Courses extends AppCompatActivity {
@@ -35,6 +35,8 @@ public class Courses extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         cardSetList = new ArrayList<CardSet>();
         mAuth = FirebaseAuth.getInstance();
+
+        llayout = (LinearLayout) findViewById(R.id.scrollLayout);
         
         //temporary local data for experimentation
         CardSet.Card numberCards[] = new CardSet.Card[] {
@@ -125,8 +127,11 @@ public class Courses extends AppCompatActivity {
                     startActivity(new Intent(Courses.this, CourseOptionsPopup.class));
             
                 });
-        
-                llayout.addView(b);
+                runOnUiThread(()->{
+                    LinearLayout ll = (LinearLayout) findViewById(R.id.scrollLayout);
+                    ll.addView(b);
+                });
+
             }
             return null;
         }, e->{
