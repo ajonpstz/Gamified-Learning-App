@@ -49,8 +49,8 @@ public class CreateAccount extends AppCompatActivity
                 username = usernameView.getText().toString(),
                 password = passwordView.getText().toString(),
                 password2 = password2View.getText().toString();
-    
-    
+
+
         Log.e("DEBUG", "email = " + email);
         Log.e("DEBUG", "username = " + username);
         Log.e("DEBUG", "password = " + password);
@@ -60,14 +60,14 @@ public class CreateAccount extends AppCompatActivity
         else if(email.isEmpty()) Toast.makeText(CreateAccount.this, "Fill out an Email", Toast.LENGTH_LONG).show();
         else if(password.isEmpty()) Toast.makeText(CreateAccount.this, "Create a Password", Toast.LENGTH_LONG).show();
         else if(password2.isEmpty()) Toast.makeText(CreateAccount.this, "Retype your Password", Toast.LENGTH_LONG).show();
-        // check if passwords match q
+            // check if passwords match q
         else if(!password.equals(password2)) Toast.makeText(CreateAccount.this, "Passwords Don't Match", Toast.LENGTH_LONG).show();
         else{
             usernameView.setText("");
             emailView.setText("");
             passwordView.setText("");
             password2View.setText("");
-    
+
             Toast.makeText(CreateAccount.this, "Working on it", Toast.LENGTH_LONG).show();
             createUser(email, username, password, password2);
         }
