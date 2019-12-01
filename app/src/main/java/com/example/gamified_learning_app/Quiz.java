@@ -13,6 +13,8 @@ import androidx.core.content.ContextCompat;
 import com.example.gamified_learning_app.data.CardSet;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.Calendar;
+
 public class Quiz extends AppCompatActivity {
     private int cardNumber;
     private CardSet cardDeck;
@@ -114,7 +116,8 @@ public class Quiz extends AppCompatActivity {
             LinearLayout ll = (LinearLayout) findViewById(R.id.scrollLayout);
             ll.addView(conclusion);
 
-
+            Calendar calendar = Calendar.getInstance();
+            Courses.activeSet.add(new CardSet.Event(calendar.getTime(), (double)correct/(double)Courses.activeSet.cards.size(), 0.0));
         }
         else {
 
