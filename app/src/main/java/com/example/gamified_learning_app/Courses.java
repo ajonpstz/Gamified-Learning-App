@@ -74,7 +74,7 @@ public class Courses extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_courses);
-        llayout = (LinearLayout) findViewById(R.id.scrollLayout);
+
         //scrollView = (ScrollView) findViewById(R.id.mainScroll);
 
 
