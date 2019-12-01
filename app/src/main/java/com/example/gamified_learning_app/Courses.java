@@ -96,7 +96,7 @@ public class Courses extends AppCompatActivity {
         
         
         setContentView(R.layout.activity_courses);
-        llayout = (LinearLayout) findViewById(R.id.scrollLayout);
+
         //scrollView = (ScrollView) findViewById(R.id.mainScroll);
         
         FirebaseDBManager.getCardSet(mAuth.getCurrentUser().getDisplayName(), cardSets -> {
