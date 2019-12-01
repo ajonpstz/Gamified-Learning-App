@@ -121,6 +121,5 @@ public class Courses extends AppCompatActivity {
         Intent intent = new Intent(this, Homepage.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
-
     }
 }
