@@ -82,8 +82,11 @@ public class Courses extends AppCompatActivity {
                 b.setPadding(50,50,50,50);
                 b.setTextSize(20);
                 b.setOnClickListener((View view)->{
-                    activeSet = new CardSet("user",  "name",  "description");
+                    mAuth = FirebaseAuth.getInstance();
+                    activeSet = new CardSet(mAuth.getCurrentUser().getDisplayName(),  "name",  "description");
                     activeSet.cards.add(new CardSet.Card("Term", "Definition"));
+
+
 
                     Intent intent = new Intent(this, EditCards.class);
                     startActivity(intent);

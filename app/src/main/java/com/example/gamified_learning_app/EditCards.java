@@ -42,13 +42,13 @@ public class EditCards extends AppCompatActivity {
         tmp.setPadding(50,50,50,50);
         tmp.setTextSize(20);
         scrollLayout.addView(tmp);
-        edittmp = new EditText(getApplicationContext());
-        edittmp.setText(Courses.activeSet.owner);
-        edittmp.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorText));
-        edittmp.setPadding(50,50,50,50);
-        edittmp.setTextSize(20);
-        edittmp.setBackgroundResource(R.drawable.text_border);
-        scrollLayout.addView(edittmp);
+        tmp = new TextView(getApplicationContext());
+        tmp.setText(Courses.activeSet.owner);
+        tmp.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorText));
+        tmp.setPadding(50,50,50,50);
+        tmp.setTextSize(20);
+        tmp.setBackgroundResource(R.drawable.text_border);
+        scrollLayout.addView(tmp);
 
         tmp = new TextView(getApplicationContext());
         tmp.setText("Description");
