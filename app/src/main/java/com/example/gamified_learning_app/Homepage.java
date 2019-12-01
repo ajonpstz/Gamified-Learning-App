@@ -6,13 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gamified_learning_app.tool.FirebaseDBManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Homepage extends AppCompatActivity {
@@ -35,37 +37,25 @@ public class Homepage extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         if (user == null) {
         } else {
-
-
-                // values that dont use firestore
-            TextView userName = findViewById(R.id.userName);
-            TextView email = findViewById(R.id.email);
-            userName.setText(user.getDisplayName());
-            email.setText(user.getEmail());
-
-            // values that do need firestore
-            FirebaseFirestore mDatabase = FirebaseFirestore.getInstance();
-
-            TextView successfulTasks = findViewById(R.id.successfulTasks);
-            TextView attempted = findViewById(R.id.attempted);
-            TextView rate = findViewById(R.id.rate);
-
-            DocumentReference userDetails = mDatabase.collection("userData").document(user.getUid());
-            userDetails.get().addOnSuccessListener(snapshot ->
-            {
-                /*successfulTasks.setText(Long.toString(snapshot.getLong("correctTasks")));
-                attempted.setText(Long.toString(snapshot.getLong("attemptedTasks")));*/
-                // calculate success rate
-                /*double percentage;
-                if(!attempted.getText().toString().equals("0"))
-                {
-                    percentage = Double.parseDouble(successfulTasks.getText().toString()) / Integer.parseInt(attempted.getText().toString()) * 100.00;
-                }
-                else
-                {
-                    percentage = 0;
-                }
-                rate.setText(String.format("%.2f", percentage) + "%");*/
+            // values that dont use firestore
+    
+            FirebaseDBManager.getUser(user.getDisplayName(), user->{
+                TextView userName = findViewById(R.id.userName);
+                TextView email = findViewById(R.id.email);
+                TextView description = findViewById(R.id.description);
+                TextView currency = findViewById(R.id.currency);
+                TextView pcurrency = findViewById(R.id.premiumCurrency);
+                
+                userName.setText(user.username);
+                email.setText(user.email);
+                description.setText(user.description);
+                currency.setText(Long.toString(user.currency));
+                pcurrency.setText(Long.toString(user.premiumCurrency));
+                
+                return null;
+            }, nothing->{
+                goToLogin(null);
+                return null;
             });
         }
     }
