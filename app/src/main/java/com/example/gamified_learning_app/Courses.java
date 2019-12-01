@@ -70,33 +70,6 @@ public class Courses extends AppCompatActivity {
             return null;
         });
 
-//
-//        //(String owner, String name, String description, List<Event> history, List<Card> cards)
-//        cardSetList.add(new CardSet("owner", "Numbers", "description", null,
-//                new ArrayList<CardSet.Card>(Arrays.asList(numberCards))));
-//        cardSetList.add(new CardSet("owner", "Operating System", "description", null,
-//                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
-//        cardSetList.add(new CardSet("owner", "Operating System2", "description", null,
-//                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
-//        cardSetList.add(new CardSet("owner", "Operating System3", "description", null,
-//                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
-//        cardSetList.add(new CardSet("owner", "Operating System4", "description", null,
-//                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
-//        cardSetList.add(new CardSet("owner", "Operating System5", "description", null,
-//                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
-//        cardSetList.add(new CardSet("owner", "Operating System6", "description", null,
-//                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
-//        cardSetList.add(new CardSet("owner", "Operating System7", "description", null,
-//                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
-//        cardSetList.add(new CardSet("owner", "Operating System8", "description", null,
-//                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
-//        cardSetList.add(new CardSet("owner", "Operating System9", "description", null,
-//                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
-//        cardSetList.add(new CardSet("owner", "Operating System10", "description", null,
-//                new ArrayList<CardSet.Card>(Arrays.asList(osCards))));
-        
-        
-        
         setContentView(R.layout.activity_courses);
 
         //scrollView = (ScrollView) findViewById(R.id.mainScroll);
