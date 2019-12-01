@@ -2,7 +2,6 @@ package com.example.gamified_learning_app.data;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -98,15 +97,13 @@ public class CardSet {
 			return Calendar.getInstance().getTime();
 		else {
 			int j = history.size()-1;
-			while (history.get(j).recallRate >= FAILURE_RATE)
+			while (j > 0 && history.get(j).recallRate >= FAILURE_RATE)
 				j--;
-			double t = Math.pow((1-SAVING_RATE)*Ebbinghaus_const/FAILURE_RATE,
-				Math.log(10)/Math.log(Ebbinghaus_exp)) * Math.pow(2,history.size()-1-j);
-			Date res = history.get(history.size()-1).date;
-			LocalDateTime.from(res.toInstant()).plusDays(
-				(long) Math.ceil(t / 1440)
-			);
-			return res;
+			double t = 1440 * Math.pow(3,history.size()-1-j);
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(history.get(history.size()-1).date);
+			calendar.add(Calendar.DATE, (int) Math.ceil(t / 1440));
+			return calendar.getTime();
 		}
 	}
 	

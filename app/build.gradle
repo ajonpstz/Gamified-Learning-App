@@ -31,6 +31,7 @@ android {
     useLibrary 'android.test.mock'
 }
 
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -60,7 +61,6 @@ dependencies {
     // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
-
     testImplementation 'junit:junit:4.12'
 
     // Assertions
