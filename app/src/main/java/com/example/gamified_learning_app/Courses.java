@@ -8,14 +8,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.example.gamified_learning_app.data.CardSet;
 import com.example.gamified_learning_app.tool.FirebaseDBManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 
 public class Courses extends AppCompatActivity {
@@ -81,6 +81,14 @@ public class Courses extends AppCompatActivity {
                 b.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.colorAccent_secondary));
                 b.setPadding(50,50,50,50);
                 b.setTextSize(20);
+                b.setOnClickListener((View view)->{
+                    activeSet = new CardSet("user",  "name",  "description");
+                    activeSet.cards.add(new CardSet.Card("Term", "Definition"));
+
+                    Intent intent = new Intent(this, EditCards.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                });
                 //b.setBackgroundResource(R.drawable.text_border);
                 ll.addView(b);
             });
