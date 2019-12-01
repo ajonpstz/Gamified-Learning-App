@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "967522903556-ejpicm4cp9je7vpr2dbrk1c3bbungl0f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gamified_learning_app",
+            "certificate_hash": "1e0db023a4e25042affb2b92617c81589e62caf3"
+          }
+        },
+        {
+          "client_id": "967522903556-eu2ee0upsm66al8ve3jo47ig5qf5c16a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gamified_learning_app",
+            "certificate_hash": "b70940765cc8833c7c0fa11231598d158265162f"
+          }
+        },
+        {
           "client_id": "612077610989-hd5vpth230p42sm6t7lmrgk0sgv89i16.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
