@@ -35,25 +35,25 @@ public class Homepage extends AppCompatActivity {
         if (user == null) {
         } else {
             // values that dont use firestore
-            TextView userName = findViewById(R.id.userName);
-            TextView email = findViewById(R.id.email);
     
             FirebaseDBManager.getUser(user.getDisplayName(), user->{
+                TextView userName = findViewById(R.id.userName);
+                TextView email = findViewById(R.id.email);
+                TextView description = findViewById(R.id.description);
+                TextView currency = findViewById(R.id.currency);
+                TextView pcurrency = findViewById(R.id.premiumCurrency);
+                
                 userName.setText(user.username);
                 email.setText(user.email);
+                description.setText(user.description);
+                currency.setText(Long.toString(user.currency));
+                pcurrency.setText(Long.toString(user.premiumCurrency));
+                
                 return null;
             }, nothing->{
                 goToLogin(null);
                 return null;
             });
-
-            TextView successfulTasks = findViewById(R.id.successfulTasks);
-            TextView attempted = findViewById(R.id.attempted);
-            TextView rate = findViewById(R.id.rate);
-            
-            successfulTasks.setText(Long.toString(0));
-            attempted.setText(Long.toString(0));
-            rate.setText(Double.toString(0));
         }
     }
 

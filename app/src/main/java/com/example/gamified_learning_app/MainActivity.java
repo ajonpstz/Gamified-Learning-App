@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 		Actions
 	 */
 	public void submitLogin(View view) {
-		TextView emailView = findViewById(R.id.email);
+		TextView emailView = findViewById(R.id.description);
 		TextView passwordView = findViewById(R.id.password);
 		
 		String email = emailView.getText().toString(),
@@ -88,22 +88,19 @@ public class MainActivity extends AppCompatActivity {
 
 /*
 TODO: Create Firebase Auth Manager
-	- Login             O
-	- Logout            O
+	- Login             X
+	- Logout            X
 	- Create Account    X
-	- Check Account     O
+	- Delte Account     O
 	
 TODO: Create Firebase Data Manager
 	- Connect to Manager
 	- Get
-		- Task
-		- TaskList
+		- CardSet                   X
 		- User
-			- Create                0
-			- Get                   0
-			- Update                0
-		- Badge
-		- Memorization List
+			- Create                X
+			- Get                   X
+			- Update                X
 	- Write all of the above
 	
 TODO: Create a server that does the scheduling (or we can schedule locally)

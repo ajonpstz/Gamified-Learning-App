@@ -42,7 +42,7 @@ public class CreateAccount extends AppCompatActivity
 
     // checks all input strings before sending them to createUser
     public void submitCreate(View view) {
-        TextView emailView = findViewById(R.id.email),
+        TextView emailView = findViewById(R.id.description),
                 usernameView = findViewById(R.id.username),
                 passwordView = findViewById(R.id.newPass1),
                 password2View = findViewById(R.id.newPass2);

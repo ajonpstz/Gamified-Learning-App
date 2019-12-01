@@ -104,21 +104,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/usernameTitle"
-                android:layout_width="173dp"
-                android:layout_height="wrap_content"
-                android:ems="4"
-                android:text="@string/usernameTitle"
-                android:textSize="25sp" />
-
-            <TextView
                 android:id="@+id/userName"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="12sp"
                 android:autoSizeMaxTextSize="25dp"
+                android:autoSizeMinTextSize="12sp"
                 android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
                 android:ems="4"
                 android:gravity="right"
                 android:textSize="25sp" />
@@ -131,21 +123,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/correctTasksTitle"
-                android:layout_width="215dp"
+                android:id="@+id/email"
+                android:layout_width="268dp"
                 android:layout_height="wrap_content"
-                android:ems="4"
-                android:text="@string/correctTasksTitle"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/successfulTasks"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="12sp"
                 android:autoSizeMaxTextSize="25dp"
+                android:autoSizeMinTextSize="12sp"
                 android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
                 android:ems="4"
                 android:gravity="right"
                 android:textSize="25sp" />
@@ -158,23 +142,23 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/attemptedTitle"
-                android:layout_width="wrap_content"
+                android:id="@+id/premiumCurrencyTitle"
+                android:layout_width="166dp"
                 android:layout_height="46dp"
                 android:ems="4"
-                android:text="@string/attemptedTitle"
+                android:text="@string/premiumCurrencyTitle"
                 android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/attempted"
-                android:layout_width="236dp"
+                android:id="@+id/premiumCurrency"
+                android:layout_width="195dp"
                 android:layout_height="46dp"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="12sp"
                 android:autoSizeMaxTextSize="25sp"
+                android:autoSizeMinTextSize="12sp"
                 android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
                 android:ems="4"
-                android:gravity="right"/>
+                android:gravity="right" />
         </LinearLayout>
 
         <LinearLayout
@@ -188,11 +172,11 @@
                 android:layout_width="165dp"
                 android:layout_height="46dp"
                 android:ems="4"
-                android:text="@string/SuccessRateTitle"
+                android:text="@string/currencyTitle"
                 android:textSize="25sp" />
 
             <TextView
-                android:id="@+id/rate"
+                android:id="@+id/currency"
                 android:layout_width="194dp"
                 android:layout_height="46dp"
                 android:ems="4"
@@ -202,35 +186,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/emailTitle"
-                android:layout_width="80dp"
-                android:layout_height="46dp"
-                android:ems="4"
-                android:text="@string/emailTitle"
-                android:textSize="25sp" />
-
-            <TextView
-                android:id="@+id/email"
-                android:layout_width="276dp"
-                android:layout_height="46dp"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="12sp"
+                android:id="@+id/description"
+                android:layout_width="282dp"
+                android:layout_height="132dp"
                 android:autoSizeMaxTextSize="25sp"
+                android:autoSizeMinTextSize="12sp"
                 android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
                 android:ems="4"
-                android:gravity="right"/>
+                android:gravity="right" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="43dp"
-            android:orientation="horizontal"
-            android:gravity="bottom">
+            android:gravity="bottom"
+            android:orientation="horizontal">
 
             <Space
                 android:layout_width="wrap_content"
