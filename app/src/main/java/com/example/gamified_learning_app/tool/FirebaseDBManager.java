@@ -39,7 +39,7 @@ public class FirebaseDBManager {
 		db.runTransaction(transaction -> {
 			DocumentSnapshot snapshot = transaction.get(userDetails);
 			if (!snapshot.exists())
-				transaction.update(userDetails, new ObjectMapper().convertValue(user, Map.class));
+				transaction.set(userDetails, new ObjectMapper().convertValue(user, Map.class));
 			return null;
 		}).addOnSuccessListener(aVoid->{
 			if (onDelivery != null) onDelivery.apply(user);
@@ -99,7 +99,7 @@ public class FirebaseDBManager {
 			if (snapshot.exists()) {
 				onFail.apply("A card deck of the same identifier already exist");
 			} else
-				transaction.update(cardDetails, new ObjectMapper().convertValue(deck, Map.class));
+				transaction.set(cardDetails, new ObjectMapper().convertValue(deck, Map.class));
 			return null;
 		}).addOnSuccessListener(aVoid->{
 			if (onDelivery != null)
