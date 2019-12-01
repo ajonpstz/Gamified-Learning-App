@@ -40,10 +40,16 @@ public class EditCards extends AppCompatActivity {
 
         Button addCard = new Button(getApplicationContext());
         addCard.setText("ADD CARD");
+        addCard.setOnClickListener((View view)->{
+            addCard(view);
+        });
         scrollLayout.addView(addCard);
 
         Button publish = new Button(getApplicationContext());
         publish.setText("PUBLISH");
+        publish.setOnClickListener((View view)->{
+            publish(view);
+        });
         scrollLayout.addView(publish);
 
 
@@ -68,5 +74,28 @@ public class EditCards extends AppCompatActivity {
         Intent intent = new Intent(this, Courses.class);
         startActivity(intent);
         overridePendingTransition(0, 0);
+    }
+
+    public void addCard(View view){
+        LinearLayout scrollLayout = (LinearLayout) findViewById(R.id.scrollLayout);
+
+        EditText termText = new EditText(getApplicationContext());
+        termText.setText("New Term");
+        termText.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorText));
+        termText.setPadding(50,50,50,50);
+        termText.setTextSize(20);
+
+        EditText definitionText = new EditText(getApplicationContext());
+        definitionText.setText("New Definition");
+        definitionText.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorText));
+        definitionText.setPadding(50,50,50,50);
+        definitionText.setTextSize(20);
+        definitionText.setBackgroundResource(R.drawable.text_border);
+        scrollLayout.addView(termText, scrollLayout.getChildCount()-2);
+        scrollLayout.addView(definitionText,scrollLayout.getChildCount()-2);
+    }
+
+    public void publish (View view){
+
     }
 }

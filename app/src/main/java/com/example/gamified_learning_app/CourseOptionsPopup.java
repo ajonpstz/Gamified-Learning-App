@@ -8,8 +8,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+
+import java.util.Date;
 
 public class CourseOptionsPopup extends Activity {
     @Override
@@ -42,6 +45,19 @@ public class CourseOptionsPopup extends Activity {
         System.out.println("lp:");
         //d.show();
         getWindow().setAttributes(lp);
+
+        TextView nextReview = (TextView) findViewById(R.id.nextReview);
+        Date nextDate = Courses.activeSet.nextScheduled();
+        int hour = nextDate.getHours() +1;
+        String m = "am";
+        if (hour > 12) {
+            hour-=12;
+            m = "pm";
+        }
+        nextReview.setText("Next Review\n" +
+                (nextDate.getMonth()+1) + "/" + (nextDate.getDay()+1) + "/" + (nextDate.getYear()+1900) + "\n" +
+                hour + ":" +(nextDate.getMinutes()) + " " + m);
+
     }
 
     public void goToCards(View view) {
