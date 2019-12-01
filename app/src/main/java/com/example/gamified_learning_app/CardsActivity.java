@@ -40,6 +40,8 @@ public class CardsActivity extends AppCompatActivity {
     }
 
     private void setCardText(){
+        currentCard = cardDeck.get(cardNumber);
+
         if (term){
             cardButton.setText(currentCard.getTerm());
         }
@@ -69,7 +71,8 @@ public class CardsActivity extends AppCompatActivity {
     }
 
     public void doFlip(View view){
-
+        term = !term;
+        setCardText();
     }
 
     public void nextCard(View view){

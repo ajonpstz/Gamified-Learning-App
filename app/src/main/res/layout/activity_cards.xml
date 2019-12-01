@@ -17,7 +17,8 @@
             android:id="@+id/rightLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="50px">
 
             <LinearLayout
                 android:id="@+id/lay1"
@@ -76,6 +77,7 @@
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="482dp"
+            android:background="@color/colorPrimary"
             android:onClick="doFlip" />
 
         <LinearLayout
