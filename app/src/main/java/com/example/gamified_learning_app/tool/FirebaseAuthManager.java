@@ -1,6 +1,7 @@
 package com.example.gamified_learning_app.tool;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.gamified_learning_app.data.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,15 +33,24 @@ public class FirebaseAuthManager {
 	                            OnFailureListener onFail) {
 		if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(username))
 			return ERR_NO.EMPTY_PARAMETER;
-		FirebaseAuth auth = FirebaseAuth.getInstance();
-		Task task = auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
-			update_profile(username);
-			FirebaseDBManager.createUser(new User(email, username), null, null);
+		FirebaseDBManager.getUser(username, user -> {
+			Log.e("DEBUG", "BAD CREATE");
+			if (onFail != null)
+				onFail.onFailure(new IllegalAccessException("Use with the same username exists"));
+			return null;
+		}, e->{
+			Log.e("DEBUG", e);
+			FirebaseAuth auth = FirebaseAuth.getInstance();
+			Task task = auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+				update_profile(username);
+				FirebaseDBManager.createUser(new User(email, username), null, null);
+			});
+			if (onDelivery != null)
+				task.addOnSuccessListener(onDelivery);
+			if (onFail != null)
+				task.addOnFailureListener(onFail);
+			return null;
 		});
-		if (onDelivery != null)
-			task.addOnSuccessListener(onDelivery);
-		if (onFail != null)
-			task.addOnFailureListener(onFail);
 		return ERR_NO.NONE;
 	}
 	

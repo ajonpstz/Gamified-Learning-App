@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 
-
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -49,9 +48,10 @@ dependencies {
 
     // Firebase Libraries
     implementation 'com.google.firebase:firebase-analytics:17.2.1'
-    implementation 'com.google.firebase:firebase-auth:19.1.0'
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.firebase:firebase-firestore:21.3.0'
     implementation 'com.google.firebase:firebase-database:19.2.0'
+
 
     // Core library
     androidTestImplementation 'androidx.test:core:1.2.0'
@@ -60,6 +60,8 @@ dependencies {
     // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
+
+    testImplementation 'junit:junit:4.12'
 
     // Assertions
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

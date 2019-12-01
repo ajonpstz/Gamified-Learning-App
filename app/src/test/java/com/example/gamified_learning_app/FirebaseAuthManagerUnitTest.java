@@ -16,7 +16,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 @RunWith(RobolectricTestRunner.class)
 public class FirebaseAuthManagerUnitTest {
 	
-	static final String emailUsed = "aqn180001@utdallas.edu";
+	static final String emailUsed = "anquocnguyen@outlook.com";
 	static final String username = "m1sch3f";
 	static final String password = emailUsed;
 	
@@ -27,12 +27,13 @@ public class FirebaseAuthManagerUnitTest {
 		
 		System.out.println("START TEST");
 		
-		FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener(
+		FirebaseAuth.getInstance().signInWithEmailAndPassword(emailUsed, password)
+			.addOnCompleteListener(
 			authResultTask->{
 				if (authResultTask.isSuccessful())
-					System.out.println("SUCCESSFUL SIGN IN");
+					Log.e("DEBUG", "SUCCESSFUL");
 				else
-					System.out.println("NO");
+					Log.e("DEBUG", authResultTask.getException().getLocalizedMessage());
 			}
 		);
 		FirebaseAuthManager.login(emailUsed, password, authResultTask->{
@@ -59,7 +60,6 @@ public class FirebaseAuthManagerUnitTest {
 			System.out.println(e.getStackTrace());
 		});
 		
-		long t = Long.MAX_VALUE;
-		while (t-->0);
+		System.out.println("TEST ENDED NORMALLY");
 	}
 }

@@ -20,13 +20,11 @@ public class User {
     }
     
     public User(DocumentSnapshot snapshot) {
-        this.email = snapshot.getString("email");
-        this.username = snapshot.getString("username");
-        this.description = snapshot.getString("description");
-        Long currency = snapshot.getLong("currency");
-        Long premiumCurrency = snapshot.getLong("premiumCurrency");
-        this.currency = currency == null ? 0 : currency;
-        this.premiumCurrency = premiumCurrency == null ? 0 : premiumCurrency;
+        this(snapshot.getString("email"), snapshot.getString("username"),
+            snapshot.getString("description"),
+            snapshot.getLong("currency") == null ? 0 : snapshot.getLong("currency"),
+            snapshot.getLong("premiumCurrency") == null ? 0 : snapshot.getLong("premiumCurrency")
+            );
     }
     
     public User(String email, String username, String description,
