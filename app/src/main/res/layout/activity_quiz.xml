@@ -88,7 +88,10 @@
                     android:id="@+id/textDefinition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="10px"
+                    android:paddingLeft="20px"
+                    android:paddingTop="50px"
+                    android:paddingRight="20px"
+                    android:textAlignment="center"
                     android:textSize="20sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -102,6 +105,7 @@
                         android:layout_height="wrap_content"
                         android:hint="term"
                         android:paddingTop="10px"
+                        android:textAlignment="center"
                         android:textSize="20sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -117,7 +121,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingLeft="10px"
-                    android:paddingTop="100px">
+                    android:paddingTop="100px"
+                    android:paddingRight="50px"
+                    tools:paddingLeft="50px">
 
                     <TableRow
                         android:layout_width="match_parent"
@@ -129,11 +135,33 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Incorrect:"
+                            android:text="Completed:"
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/incorrectCount"
+                            android:id="@+id/completedCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="0"
+                            android:textSize="20sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingBottom="20px">
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Remaining:"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/remainingCount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -146,25 +174,21 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/textView5"
+                            android:id="@+id/textView2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Correct:"
+                            android:paddingBottom="20px"
+                            android:text="Percentage:"
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/correctCount"
+                            android:id="@+id/percentageText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="0"
                             android:textSize="20sp" />
                     </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
 
                     <TableRow
                         android:layout_width="match_parent"
