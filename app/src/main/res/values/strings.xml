@@ -8,7 +8,10 @@
     <string name="correctTasksTitle">Successful Tasks:</string>
     <string name="attemptedTitle">All Tasks:</string>
     <string name="emailTitle">Email:</string>
+    <string name="descriptionTitle">Description:</string>
     <string name="SuccessRateTitle">Success Rate:</string>
+    <string name="currencyTitle">Currency:</string>
+    <string name="premiumCurrencyTitle">PCurrency:</string>
     <string name="title_activity_change_password">Change Password</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
