@@ -33,6 +33,17 @@
                 android:onClick="goToEdit"
                 android:text="EDIT" />
 
+            <TextView
+                android:id="@+id/nextReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_weight="0"
+                android:gravity="bottom"
+                android:text="Next Review\nNOW"
+                android:textAlignment="center"
+                android:textColor="@color/colorText" />
+
             <Button
                 android:id="@+id/study"
                 android:layout_width="wrap_content"
