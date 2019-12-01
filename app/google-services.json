@@ -1,42 +1,79 @@
 {
   "project_info": {
-    "project_number": "612077610989",
-    "firebase_url": "https://lornit.firebaseio.com",
-    "project_id": "lornit",
-    "storage_bucket": "lornit.appspot.com"
+    "project_number": "967522903556",
+    "firebase_url": "https://lornitdb-1a3a0.firebaseio.com",
+    "project_id": "lornitdb-1a3a0",
+    "storage_bucket": "lornitdb-1a3a0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:612077610989:android:79b30a1f21bae8e86829e4",
+        "mobilesdk_app_id": "1:967522903556:android:f433eafd6e6e42a8d13751",
         "android_client_info": {
           "package_name": "com.example.gamified_learning_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "612077610989-hd5vpth230p42sm6t7lmrgk0sgv89i16.apps.googleusercontent.com",
+          "client_id": "967522903556-ejpicm4cp9je7vpr2dbrk1c3bbungl0f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.gamified_learning_app",
-            "certificate_hash": "b70940765cc8833c7c0fa11231598d158265162f"
+            "certificate_hash": "1e0db023a4e25042affb2b92617c81589e62caf3"
           }
         },
         {
-          "client_id": "612077610989-jq0rk5jd343mn9p1m5vv2v8nunkvpceh.apps.googleusercontent.com",
+          "client_id": "967522903556-eu2ee0upsm66al8ve3jo47ig5qf5c16a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gamified_learning_app",
+            "certificate_hash": "bb213d099f0cdae1febbe8ca730fcbea670b06ca"
+          }
+        },
+        {
+          "client_id": "967522903556-qa7bor7dis6kji5empj5gdlbolmufkm3.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCIF6Gds59KMJxPISXQsc7sv_giU07QXUg"
+          "current_key": "AIzaSyCwuy38ty-ksmluEKNnmoejBBqYraZjotE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "612077610989-jq0rk5jd343mn9p1m5vv2v8nunkvpceh.apps.googleusercontent.com",
+              "client_id": "967522903556-qa7bor7dis6kji5empj5gdlbolmufkm3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967522903556:android:ceb924fc93721e7ad13751",
+        "android_client_info": {
+          "package_name": "com.m1sch3f.root"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967522903556-qa7bor7dis6kji5empj5gdlbolmufkm3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwuy38ty-ksmluEKNnmoejBBqYraZjotE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967522903556-qa7bor7dis6kji5empj5gdlbolmufkm3.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
