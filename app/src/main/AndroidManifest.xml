@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ViewCard"></activity>
+        <activity android:name=".Quiz"></activity>
+        <activity android:name=".ViewCard" />
         <activity android:name=".CardsActivity" />
         <activity android:name=".ChangeEmail" />
         <activity android:name=".CreateAccount" />

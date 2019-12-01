@@ -56,6 +56,12 @@ public class CourseOptionsPopup extends Activity {
         overridePendingTransition(0, 0);
     }
 
+    public void goToQuiz(View view){
+        Intent intent = new Intent(this, Quiz.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+    }
+
 
 
 
