@@ -18,7 +18,7 @@
     <color name="colorAccent">#993955</color>
     <color name="colorAccent_secondary">#FF8552</color>
     <color name="colorHighlight">#B2ABF2</color>
-
+    <color name="colorToday">#41E690</color>
 
     <color name="colorText">#FFFFFF</color>
 

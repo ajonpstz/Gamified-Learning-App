@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gamified_learning_app.tool.FirebaseAuthManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -33,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
 	// attempts to sign in the user using the given email and pass, then checks if they're email is authorized
 	private void signIn(String email, String password) {
 		if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-			mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(
-				MainActivity.this, new OnCompleteListener<AuthResult>() {
+			FirebaseAuthManager.login(email,password, new OnCompleteListener<AuthResult>() {
 					@Override
 					public void onComplete(@NonNull Task<AuthResult> task) {
 						if (task.isSuccessful()) {
