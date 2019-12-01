@@ -47,6 +47,9 @@ public class EditCards extends AppCompatActivity {
 
         Button publish = new Button(getApplicationContext());
         publish.setText("PUBLISH");
+        publish.setOnClickListener((View view)->{
+            publish(view);
+        });
         scrollLayout.addView(publish);
 
 
@@ -90,5 +93,9 @@ public class EditCards extends AppCompatActivity {
         definitionText.setBackgroundResource(R.drawable.text_border);
         scrollLayout.addView(termText, scrollLayout.getChildCount()-2);
         scrollLayout.addView(definitionText,scrollLayout.getChildCount()-2);
+    }
+
+    public void publish (View view){
+
     }
 }
