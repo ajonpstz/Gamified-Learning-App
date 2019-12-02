@@ -149,20 +149,25 @@ public class EditCards extends AppCompatActivity {
         scrollLayout.addView(definitionText,scrollLayout.getChildCount()-2);
     }
 
+    private boolean publishError = false;
+    private void setPError(){publishError = true;}
+
     public void publish (View view){
         String previousName = Courses.activeSet.name;
+
         ArrayList<CardSet.Card> newCards = new ArrayList<>();
         LinearLayout scrollLayout = (LinearLayout) findViewById(R.id.scrollLayout);
 
+        TextView tvn = (TextView)scrollLayout.getChildAt(1);
+        String newName = tvn.getText().toString();
+
         for (int i = 0; i < scrollLayout.getChildCount()-2; i++){
             System.out.println("Scroll Here:" + i);
-            if (i == 1){
-                TextView tv = (TextView)scrollLayout.getChildAt(i);
-                Courses.activeSet.name = tv.getText().toString();
-            }
-            else if (i == 5){
+
+            if (i == 5){
                 TextView tv = (TextView)scrollLayout.getChildAt(i);
                 Courses.activeSet.description = tv.getText().toString();
+
             }
             else if (i >= 6){
                 EditText tv = (EditText)  scrollLayout.getChildAt(i);
@@ -177,6 +182,20 @@ public class EditCards extends AppCompatActivity {
         }
         Courses.activeSet.cards = newCards;
 
+
+        if (! previousName.equals(newName)){
+            FirebaseDBManager.deleteCardSet(Courses.activeSet, (CardSet c)->{return null;}, (String str)->{
+                setPError();
+                Toast.makeText(this, "Publish Unsuccessful!", Toast.LENGTH_LONG).show();
+                return null;});
+            if (publishError){
+                publishError = false;
+                return;
+            }
+        }
+
+        Courses.activeSet.name = newName;
+
         FirebaseDBManager.updateCardSet(Courses.activeSet, (CardSet cs)->{
             Toast.makeText(this, "Publish Successful!", Toast.LENGTH_LONG).show();
             return null;
@@ -185,5 +204,7 @@ public class EditCards extends AppCompatActivity {
             Toast.makeText(this, "Publish Unsuccessful!", Toast.LENGTH_LONG).show();
             return null;
         });
+
+
     }
 }
