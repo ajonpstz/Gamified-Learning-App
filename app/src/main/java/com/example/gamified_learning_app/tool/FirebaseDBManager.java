@@ -53,7 +53,9 @@ public class FirebaseDBManager {
 	                           Function<String,Void> onFail) {
 		DocumentReference userDetails = db.collection("users").document(username);
 		userDetails.get().addOnSuccessListener(snapshot->{
-			if (onDelivery != null) onDelivery.apply(new User(snapshot));
+			if (snapshot.exists()) {
+				if (onDelivery != null) onDelivery.apply(new User(snapshot));
+			} else if (onFail != null) onDelivery.apply(null);
 		}).addOnFailureListener(e->{
 			if (onFail != null) onFail.apply(e.getLocalizedMessage());
 		});

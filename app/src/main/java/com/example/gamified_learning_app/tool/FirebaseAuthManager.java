@@ -35,8 +35,19 @@ public class FirebaseAuthManager {
 			return ERR_NO.EMPTY_PARAMETER;
 		FirebaseDBManager.getUser(username, user -> {
 			Log.e("DEBUG", "BAD CREATE");
-			if (onFail != null)
+			if (user != null && onFail != null)
 				onFail.onFailure(new IllegalAccessException("Use with the same username exists"));
+			else if (user == null) {
+				FirebaseAuth auth = FirebaseAuth.getInstance();
+				Task task = auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
+					update_profile(username);
+					FirebaseDBManager.createUser(new User(email, username), null, null);
+				});
+				if (onDelivery != null)
+					task.addOnSuccessListener(onDelivery);
+				if (onFail != null)
+					task.addOnFailureListener(onFail);
+			}
 			return null;
 		}, e->{
 			Log.e("DEBUG", e);
