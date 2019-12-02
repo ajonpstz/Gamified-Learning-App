@@ -1,5 +1,6 @@
 package com.example.gamified_learning_app;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,11 +8,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.gamified_learning_app.data.CardSet;
+import com.example.gamified_learning_app.tool.FirebaseDBManager;
+
+import java.util.ArrayList;
 
 public class EditCards extends AppCompatActivity {
 
@@ -95,7 +100,7 @@ public class EditCards extends AppCompatActivity {
         scrollLayout.addView(addCard);
 
         Button publish = new Button(getApplicationContext());
-        publish.setText("PUBLISH");
+        publish.setText("SAVE");
         publish.setOnClickListener((View view)->{
             publish(view);
         });
@@ -145,6 +150,40 @@ public class EditCards extends AppCompatActivity {
     }
 
     public void publish (View view){
+        String previousName = Courses.activeSet.name;
+        ArrayList<CardSet.Card> newCards = new ArrayList<>();
+        LinearLayout scrollLayout = (LinearLayout) findViewById(R.id.scrollLayout);
 
+        for (int i = 0; i < scrollLayout.getChildCount()-2; i++){
+            System.out.println("Scroll Here:" + i);
+            if (i == 1){
+                TextView tv = (TextView)scrollLayout.getChildAt(i);
+                Courses.activeSet.name = tv.getText().toString();
+            }
+            else if (i == 5){
+                TextView tv = (TextView)scrollLayout.getChildAt(i);
+                Courses.activeSet.description = tv.getText().toString();
+            }
+            else if (i >= 6){
+                EditText tv = (EditText)  scrollLayout.getChildAt(i);
+                i++;
+                EditText et = (EditText) scrollLayout.getChildAt(i);
+
+                CardSet.Card c = new CardSet.Card(tv.getText().toString(), et.getText().toString());
+                System.out.println("NAMES:" + tv.getText().toString() + "\t" + et.getText().toString());
+                newCards.add(c);
+            }
+
+        }
+        Courses.activeSet.cards = newCards;
+
+        FirebaseDBManager.updateCardSet(Courses.activeSet, (CardSet cs)->{
+            Toast.makeText(this, "Publish Successful!", Toast.LENGTH_LONG).show();
+            return null;
+        }, (String str)->{
+            Dialog dialog = new Dialog(getApplicationContext());
+            Toast.makeText(this, "Publish Unsuccessful!", Toast.LENGTH_LONG).show();
+            return null;
+        });
     }
 }

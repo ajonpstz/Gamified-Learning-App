@@ -3,7 +3,6 @@ package com.example.gamified_learning_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,7 +28,7 @@ public class ViewCard extends AppCompatActivity {
         tmp.setPadding(50,50,50,50);
         tmp.setTextSize(20);
         scrollLayout.addView(tmp);
-        tmp = new EditText(getApplicationContext());
+        tmp = new TextView(getApplicationContext());
         tmp.setText(Courses.activeSet.name);
         tmp.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorText));
         tmp.setPadding(50,50,50,50);
@@ -43,7 +42,7 @@ public class ViewCard extends AppCompatActivity {
         tmp.setPadding(50,50,50,50);
         tmp.setTextSize(20);
         scrollLayout.addView(tmp);
-        tmp = new EditText(getApplicationContext());
+        tmp = new TextView(getApplicationContext());
         tmp.setText(Courses.activeSet.owner);
         tmp.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorText));
         tmp.setPadding(50,50,50,50);
@@ -57,7 +56,7 @@ public class ViewCard extends AppCompatActivity {
         tmp.setPadding(50,50,50,50);
         tmp.setTextSize(20);
         scrollLayout.addView(tmp);
-        tmp = new EditText(getApplicationContext());
+        tmp = new TextView(getApplicationContext());
         tmp.setText(Courses.activeSet.description);
         tmp.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorText));
         tmp.setPadding(50,50,50,50);

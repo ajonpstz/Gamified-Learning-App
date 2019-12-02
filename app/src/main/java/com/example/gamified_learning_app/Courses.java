@@ -1,5 +1,6 @@
 package com.example.gamified_learning_app;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -85,6 +87,15 @@ public class Courses extends AppCompatActivity {
                     mAuth = FirebaseAuth.getInstance();
                     activeSet = new CardSet(mAuth.getCurrentUser().getDisplayName(),  "name",  "description");
                     activeSet.cards.add(new CardSet.Card("Term", "Definition"));
+
+                    FirebaseDBManager.createCardSet(Courses.activeSet, (CardSet cs)->{
+                        Toast.makeText(this, "Publish Successful!", Toast.LENGTH_LONG).show();
+                        return null;
+                    }, (String str)->{
+                        Dialog dialog = new Dialog(getApplicationContext());
+                        Toast.makeText(this, "Publish Unsuccessful!", Toast.LENGTH_LONG).show();
+                        return null;
+                    });
 
 
 
